@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chez Paulette — Bistrot Traditionnel</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════
+   TOKENS
+═══════════════════════════ */
+:root {
+  --white:   #FFFFFF;
+  --warm:    #F8F4EF;
+  --warm2:   #F0EAE1;
+
+  --terra:   #C05A35;   /* terracotta principale */
+  --terra-d: #9E4425;   /* foncé */
+  --terra-l: #E8967A;   /* clair */
+  --terra-bg:#FDF0EB;   /* fond très pâle */
+
+  --sage:    #6B8F71;   /* vert sauge */
+  --sage-d:  #4D6B52;
+  --sage-bg: #EEF4EF;
+
+  --ink:     #1A1917;
+  --ink2:    #58534E;
+  --ink3:    #A09890;
+  --border:  #E4DDD5;
+
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'DM Sans', sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-weight: 300;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; }
+::selection { background: var(--terra); color: white; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--warm); }
+::-webkit-scrollbar-thumb { background: var(--terra-l); }
+
+/* ═══════════════════════════
+   NAV
+═══════════════════════════ */
+nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 300;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3rem;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow 0.3s;
+}
+nav.up { box-shadow: 0 2px 20px rgba(26,25,23,0.07); }
+
+.nav-logo {
+  font-family: var(--f-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.nav-logo-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--terra);
+  flex-shrink: 0;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.nav-link {
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: var(--ink2);
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-link:hover { background: var(--warm); color: var(--ink); }
+
+.nav-cta {
+  font-size: 0.78rem;
+  font-weight: 500;
+  background: var(--terra);
+  color: white;
+  padding: 0.5rem 1.3rem;
+  border-radius: 20px;
+  transition: background 0.2s;
+  margin-left: 0.5rem;
+}
+.nav-cta:hover { background: var(--terra-d); }
+
+/* ═══════════════════════════
+   HERO — split layout
+═══════════════════════════ */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  min-height: 100vh;
+  padding-top: 62px;
+}
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6rem 4rem 6rem 4rem;
+  background: var(--white);
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 2rem;
+  animation: up 0.8s ease both;
+}
+.hero-tag-line { width: 20px; height: 1px; background: var(--terra); }
+
+.hero-title {
+  font-family: var(--f-display);
+  font-size: clamp(3rem, 5.5vw, 5.2rem);
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 1.8rem;
+  animation: up 0.8s ease 0.1s both;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--terra);
+  display: block;
+}
+
+.hero-desc {
+  font-size: 1rem;
+  color: var(--ink2);
+  line-height: 1.8;
+  max-width: 42ch;
+  margin-bottom: 2.5rem;
+  animation: up 0.8s ease 0.2s both;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  animation: up 0.8s ease 0.3s both;
+}
+
+.btn {
+  font-family: var(--f-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  border-radius: 6px;
+  padding: 0.85rem 1.8rem;
+  cursor: pointer;
+  border: none;
+  display: inline-block;
+  transition: all 0.2s;
+}
+.btn-terra { background: var(--terra); color: white; }
+.btn-terra:hover { background: var(--terra-d); }
+.btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--border); }
+.btn-ghost:hover { border-color: var(--ink2); }
+
+.hero-info {
+  display: flex;
+  gap: 2rem;
+  margin-top: 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border);
+  animation: up 0.8s ease 0.4s both;
+}
+.hero-info-item {}
+.hero-info-label {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 0.2rem;
+}
+.hero-info-val {
+  font-family: var(--f-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* Panneau droit terracotta */
+.hero-right {
+  background: var(--terra);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+  animation: up 0.8s ease 0.15s both;
+}
+
+.hero-right-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(255,255,255,0.08) 0%, transparent 100%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(0,0,0,0.12) 0%, transparent 100%);
+}
+
+/* grand texte décoratif */
+.hero-deco {
+  position: absolute;
+  top: 2rem; left: 2rem;
+  font-family: var(--f-display);
+  font-size: 9rem;
+  font-weight: 900;
+  font-style: italic;
+  color: rgba(255,255,255,0.07);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.04em;
+}
+
+.hero-panel-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-panel-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  border: 1px solid rgba(255,255,255,0.25);
+  padding: 0.35rem 0.9rem;
+  border-radius: 20px;
+  margin-bottom: 1.5rem;
+}
+
+.hero-panel-quote {
+  font-family: var(--f-display);
+  font-size: 1.5rem;
+  font-weight: 300;
+  font-style: italic;
+  color: white;
+  line-height: 1.45;
+  margin-bottom: 2rem;
+}
+
+.hero-panel-meta {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.06em;
+  line-height: 1.8;
+}
+
+.hero-panel-hours {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.hour-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.75);
+}
+.hour-row .day { color: rgba(255,255,255,0.5); }
+
+@keyframes up {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════
+   SECTION UTILITIES
+═══════════════════════════ */
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-radius: 20px;
+  padding: 0.3rem 0.8rem;
+  margin-bottom: 1.2rem;
+}
+.tag-terra { background: var(--terra-bg); color: var(--terra); }
+.tag-sage  { background: var(--sage-bg);  color: var(--sage-d); }
+
+h2 {
+  font-family: var(--f-display);
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 0.8rem;
+}
+h2 em { font-style: italic; color: var(--terra); }
+
+.section-sub {
+  font-size: 0.95rem;
+  color: var(--ink2);
+  line-height: 1.8;
+  max-width: 52ch;
+}
+
+/* ═══════════════════════════
+   CONCEPT
+═══════════════════════════ */
+.concept {
+  padding: 6rem 4rem;
+  background: var(--warm);
+}
+
+.concept-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+.concept-left {}
+.concept-right { display: flex; flex-direction: column; gap: 2rem; }
+
+.concept-block {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+}
+.concept-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: var(--terra-bg);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.concept-block-text h4 {
+  font-family: var(--f-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+.concept-block-text p {
+  font-size: 0.85rem;
+  color: var(--ink2);
+  line-height: 1.75;
+}
+
+/* ═══════════════════════════
+   CARTE — tab + cartes
+═══════════════════════════ */
+.carte {
+  padding: 6rem 4rem;
+  background: var(--white);
+}
+
+.carte-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.carte-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+/* Onglets */
+.tabs {
+  display: flex;
+  background: var(--warm);
+  border-radius: 10px;
+  padding: 4px;
+  gap: 2px;
+}
+.tab {
+  font-family: var(--f-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--ink2);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+.tab.active {
+  background: var(--white);
+  color: var(--terra);
+  box-shadow: 0 1px 6px rgba(26,25,23,0.08);
+}
+.tab:hover:not(.active) { color: var(--ink); }
+
+.menu-panel { display: none; }
+.menu-panel.active { display: block; }
+
+/* Grille de cartes */
+.dishes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.dish-card {
+  background: var(--warm);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1.5px solid transparent;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.dish-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--terra);
+  border-radius: 12px 12px 0 0;
+}
+.dish-card.vege::before { background: var(--sage); }
+.dish-card:hover {
+  border-color: var(--terra-l);
+  box-shadow: 0 4px 20px rgba(192,90,53,0.08);
+}
+
+.dish-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+.dish-name {
+  font-family: var(--f-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+  flex: 1;
+}
+.dish-price {
+  font-family: var(--f-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--terra);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.dish-desc {
+  font-size: 0.8rem;
+  color: var(--ink2);
+  line-height: 1.65;
+}
+.dish-badge {
+  display: inline-block;
+  margin-top: 0.8rem;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sage-d);
+  background: var(--sage-bg);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+.carte-note {
+  margin-top: 1.5rem;
+  font-size: 0.78rem;
+  color: var(--ink3);
+  font-style: italic;
+  text-align: right;
+}
+
+/* Vins — layout différent */
+.vins-layout {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.vin-card {
+  background: var(--warm);
+  border-radius: 12px;
+  padding: 1.4rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  border: 1.5px solid transparent;
+  transition: border-color 0.2s;
+}
+.vin-card:hover { border-color: var(--border); }
+
+.vin-color-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.vin-info { flex: 1; }
+.vin-name {
+  font-family: var(--f-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.vin-region {
+  font-size: 0.75rem;
+  color: var(--ink3);
+  font-style: italic;
+  margin-top: 0.1rem;
+}
+.vin-price-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.1rem;
+  flex-shrink: 0;
+}
+.vin-price {
+  font-family: var(--f-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--terra);
+}
+.vin-unit {
+  font-size: 0.6rem;
+  color: var(--ink3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════
+   SPÉCIALITÉS — bande couleur sage
+═══════════════════════════ */
+.specialites {
+  background: var(--sage);
+  padding: 5rem 4rem;
+  color: white;
+}
+
+.spec-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.spec-intro {}
+.spec-intro .section-tag { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.8); }
+.spec-intro h2 { color: white; }
+.spec-intro h2 em { color: rgba(255,255,255,0.6); }
+.spec-intro p { color: rgba(255,255,255,0.75); font-size: 0.9rem; }
+
+.spec-list {
+  grid-column: 2 / 4;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.spec-item {
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 1.4rem 1.5rem;
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: background 0.2s;
+}
+.spec-item:hover { background: rgba(255,255,255,0.16); }
+
+.spec-item-icon { font-size: 1.4rem; margin-bottom: 0.7rem; }
+.spec-item-name {
+  font-family: var(--f-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.3rem;
+}
+.spec-item-desc { font-size: 0.78rem; color: rgba(255,255,255,0.65); line-height: 1.65; }
+
+/* ═══════════════════════════
+   RÉSERVATION
+═══════════════════════════ */
+.reservation {
+  padding: 6rem 4rem;
+  background: var(--warm);
+}
+
+.resa-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 6rem;
+  align-items: start;
+}
+
+.resa-aside {}
+.resa-aside h2 { margin-bottom: 1rem; }
+.resa-aside p { font-size: 0.9rem; color: var(--ink2); line-height: 1.8; margin-bottom: 2rem; }
+
+.resa-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.contact-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: var(--white);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--border);
+  font-size: 0.88rem;
+  color: var(--ink2);
+  transition: border-color 0.2s;
+}
+.contact-pill:hover { border-color: var(--terra-l); }
+.contact-pill-icon {
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  background: var(--terra-bg);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.contact-pill strong { color: var(--ink); font-weight: 500; display: block; }
+
+.resa-form {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 2.5rem;
+  border: 1px solid var(--border);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.form-row.single { grid-template-columns: 1fr; }
+
+.field { display: flex; flex-direction: column; gap: 0.35rem; }
+
+.field label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--ink2);
+  letter-spacing: 0.03em;
+}
+
+.field input,
+.field select,
+.field textarea {
+  background: var(--warm);
+  border: 1.5px solid var(--border);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 0.9rem;
+  font-weight: 300;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.field input::placeholder, .field textarea::placeholder { color: var(--ink3); }
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--terra);
+  box-shadow: 0 0 0 3px rgba(192,90,53,0.08);
+  background: var(--white);
+}
+.field select option { background: var(--white); }
+.field textarea { resize: vertical; min-height: 80px; }
+
+.resa-submit {
+  width: 100%;
+  margin-top: 0.5rem;
+  background: var(--terra);
+  color: white;
+  font-family: var(--f-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.9rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.resa-submit:hover { background: var(--terra-d); }
+
+#resa-ok {
+  display: none;
+  text-align: center;
+  margin-top: 1rem;
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--sage-d);
+}
+
+/* ═══════════════════════════
+   LOCALISATION
+═══════════════════════════ */
+.localisation {
+  padding: 0;
+  background: var(--white);
+}
+
+.loc-top {
+  padding: 4rem 4rem 3rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.loc-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--border);
+}
+
+.loc-infos {
+  padding: 3.5rem 4rem;
+  background: var(--warm);
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.loc-block {}
+.loc-label {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+.loc-val {
+  font-size: 0.9rem;
+  color: var(--ink2);
+  line-height: 1.9;
+}
+.loc-val a {
+  color: var(--terra);
+  font-size: 0.78rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.loc-val a:hover { color: var(--terra-d); }
+
+.hours-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.hour-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+}
+.hour-line:last-child { border-bottom: none; }
+.hour-line .dj { color: var(--ink3); font-size: 0.82rem; }
+.hour-line .hr { color: var(--ink2); }
+.hour-line.off .dj, .hour-line.off .hr { color: var(--border); }
+
+.metro-list { display: flex; flex-direction: column; gap: 0.55rem; }
+.metro-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.84rem;
+  color: var(--ink2);
+}
+.metro-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: white;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.loc-map {
+  position: relative;
+}
+.loc-map iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 440px;
+  display: block;
+  border: none;
+  filter: saturate(0.5) contrast(1.1) brightness(1.02);
+}
+/* vignette */
+.loc-map::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 40px rgba(248,244,239,0.3);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════
+   FOOTER
+═══════════════════════════ */
+footer {
+  background: var(--ink);
+  padding: 4rem 4rem 2.5rem;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid #333;
+  margin-bottom: 2rem;
+}
+
+.footer-brand-name {
+  font-family: var(--f-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.8rem;
+}
+.footer-brand-desc {
+  font-size: 0.82rem;
+  color: #666;
+  line-height: 1.75;
+  max-width: 28ch;
+}
+
+.footer-col-title {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 1rem;
+}
+.footer-col-link {
+  display: block;
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 0.55rem;
+  transition: color 0.2s;
+}
+.footer-col-link:hover { color: var(--terra-l); }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.72rem;
+  color: #444;
+}
+
+/* ═══════════════════════════
+   RESPONSIVE
+═══════════════════════════ */
+@media (max-width: 960px) {
+  nav { padding: 0 1.5rem; }
+  .nav-links { display: none; }
+
+  .hero { grid-template-columns: 1fr; }
+  .hero-left { padding: 4rem 1.5rem; }
+  .hero-right { min-height: 300px; }
+
+  .concept { padding: 4rem 1.5rem; }
+  .concept-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+
+  .carte { padding: 4rem 1.5rem; }
+  .dishes-grid { grid-template-columns: 1fr 1fr; }
+  .vins-layout { grid-template-columns: 1fr; }
+
+  .specialites { padding: 4rem 1.5rem; }
+  .spec-inner { grid-template-columns: 1fr; }
+  .spec-list { grid-column: auto; grid-template-columns: 1fr; }
+
+  .reservation { padding: 4rem 1.5rem; }
+  .resa-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+
+  .loc-top { padding: 3rem 1.5rem 2rem; }
+  .loc-split { grid-template-columns: 1fr; }
+  .loc-infos { padding: 2.5rem 1.5rem; }
+
+  footer { padding: 3rem 1.5rem 2rem; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 600px) {
+  .dishes-grid { grid-template-columns: 1fr; }
+  .hero-info { flex-direction: column; gap: 1rem; }
+  .footer-top { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAVIGATION ══ -->
+<nav id="nav">
+  <div class="nav-logo">
+    <div class="nav-logo-dot"></div>
+    Chez Paulette
+  </div>
+  <div class="nav-links">
+    <a href="#concept" class="nav-link">Le bistrot</a>
+    <a href="#carte" class="nav-link">La carte</a>
+    <a href="#localisation" class="nav-link">Accès</a>
+    <a href="#reservation" class="nav-cta">Réserver</a>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-tag"><span class="hero-tag-line"></span>Bistrot traditionnel · Lyon 2e</p>
+    <h1 class="hero-title">
+      La cuisine<br>de <em>tous les jours,</em><br>faite avec soin.
+    </h1>
+    <p class="hero-desc">
+      Depuis 1994, on cuisine ce qu'on aime manger : des plats honnêtes, des produits du marché,
+      et une cave soigneusement choisie. Bienvenue chez Paulette.
+    </p>
+    <div class="hero-btns">
+      <a href="#reservation" class="btn btn-terra">Réserver une table</a>
+      <a href="#carte" class="btn btn-ghost">Voir la carte</a>
+    </div>
+    <div class="hero-info">
+      <div class="hero-info-item">
+        <div class="hero-info-label">Fondé en</div>
+        <div class="hero-info-val">1994</div>
+      </div>
+      <div class="hero-info-item">
+        <div class="hero-info-label">Couverts</div>
+        <div class="hero-info-val">38 places</div>
+      </div>
+      <div class="hero-info-item">
+        <div class="hero-info-label">Service</div>
+        <div class="hero-info-val">Mar – Sam</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-right-bg"></div>
+    <div class="hero-deco">P</div>
+    <div class="hero-panel-content">
+      <div class="hero-panel-badge">Menu du moment</div>
+      <p class="hero-panel-quote">
+        « La bonne cuisine, c'est celle qui sent le marché du matin. »
+      </p>
+      <div class="hero-panel-meta">
+        Paulette Maréchal · Fondatrice
+      </div>
+      <div class="hero-panel-hours">
+        <div class="hour-row"><span class="day">Midi</span><span>12h00 – 14h30</span></div>
+        <div class="hour-row"><span class="day">Soir</span><span>19h30 – 22h30</span></div>
+        <div class="hour-row"><span class="day">Fermé</span><span>Dim & Lun</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONCEPT ══ -->
+<section class="concept" id="concept">
+  <div class="concept-inner">
+    <div class="concept-left">
+      <span class="section-tag tag-terra">Notre histoire</span>
+      <h2>Un bistrot qui a<br><em>gardé l'essentiel.</em></h2>
+      <p class="section-sub">
+        Paulette a ouvert cette salle de poche en 1994 avec une idée simple :
+        cuisiner chaque jour ce qu'il y a de meilleur sur l'étalage. Trente ans après,
+        rien n'a changé. Sauf peut-être la cave, qui s'est un peu agrandie.
+      </p>
+    </div>
+    <div class="concept-right">
+      <div class="concept-block">
+        <div class="concept-icon">🌿</div>
+        <div class="concept-block-text">
+          <h4>Produits du marché</h4>
+          <p>Arrivages quotidiens des Halles Paul Bocuse. Pas de carte figée — ce qu'on cuisine dépend de ce qu'on trouve.</p>
+        </div>
+      </div>
+      <div class="concept-block">
+        <div class="concept-icon">🍷</div>
+        <div class="concept-block-text">
+          <h4>Cave nature & terroir</h4>
+          <p>Une sélection de vignerons indépendants, principalement de Bourgogne et du Rhône. Le verre à partir de 5 €.</p>
+        </div>
+      </div>
+      <div class="concept-block">
+        <div class="concept-icon">👨‍🍳</div>
+        <div class="concept-block-text">
+          <h4>Cuisine maison, vraiment</h4>
+          <p>Pas de sachets, pas de surgélé. Les terrines, les sauces, les desserts — tout sort de notre petite cuisine.</p>
+        </div>
+      </div>
+      <div class="concept-block">
+        <div class="concept-icon">🪑</div>
+        <div class="concept-block-text">
+          <h4>38 couverts, pas plus</h4>
+          <p>On a voulu garder la salle petite pour s'occuper de vous correctement. La réservation est recommandée.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CARTE ══ -->
+<section class="carte" id="carte">
+  <div class="carte-inner">
+    <div class="carte-head">
+      <div>
+        <span class="section-tag tag-terra">À table</span>
+        <h2>La carte du moment</h2>
+      </div>
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab(this,'t-entrees')">Entrées</button>
+        <button class="tab" onclick="switchTab(this,'t-plats')">Plats</button>
+        <button class="tab" onclick="switchTab(this,'t-desserts')">Desserts</button>
+        <button class="tab" onclick="switchTab(this,'t-vins')">Vins</button>
+      </div>
+    </div>
+
+    <!-- Entrées -->
+    <div class="menu-panel active" id="t-entrees">
+      <div class="dishes-grid">
+        <div class="dish-card">
+          <div class="dish-header">
+            <div class="dish-name">Terrine de campagne maison</div>
+            <div class="dish-price">9 €</div>
+          </div>
+          <div class="dish-desc">Cornichons, moutarde à l'ancienne, pain grillé</div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-header">
+            <div class="dish-name">Soupe à l'oignon gratinée</div>
+            <div class="dish-price">10 €</div>
+          </div>
+          <div class="dish-desc">Gruyère fondu, croûton maison</div>
+        </div>
+        <div class="dish-card vege">
+          <div class="dish-header">
+            <div class="dish-name">Salade de chèvre chaud</div>
+            <div class="dish-price">11 €</div>
+          </div>
+          <div class="dish-desc">Miel de fleurs, noix, mâche, vinaigrette balsamique</div>
+          <span class="dish-badge">Végétarien</span>
+        </div>
+        <div class="dish-card">
+          <div class="dish-header">
+            <div class="dish-name">Œuf cocotte à la crème</div>
+            <div class="dish-price">9 €</div>
+          </div>
+          <div class="dish-desc">Lardons fumés, ciboulette, mouillettes de pain de campagne</div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-header">
+            <div class="dish-name">Escargots de Bourgogne</div>
+            <div class="dish-price">13 €</div>
+          </div>
+          <div class="dish-desc">Beurre persillé à l'ail, demi-douzaine</div>
+        </div>
+        <div class="dish-card vege">
+          <div class="dish-header">
+            <div class="dish-name">Velouté de potimarron</div>
+            <div class="dish-price">9 €</div>
+          </div>
+          <div class="dish-desc">Crème fraîche, graines de courge torréfiées</div>
+          <span class="dish-badge">Végétarien</span>
+        </div>
+      </div>
+      <p class="carte-note">Allergènes disponibles sur demande · Carte sujette à modification selon les arrivages</p>
+    </div>
+
+    <!-- Plats -->
+    <div class="menu-panel" id="t-plats">
+      <div class="dishes-grid">
+        <div class="dish-card">
+          <div class="dish-header">
+            <div class="dish-name">Bœuf bourguignon</div>
+            <div class="dish-price">19 €</div>
+          </div>
+          <div class="dish-desc">Mijotée 4 heures, lardons, champignons, pommes vapeur</div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-header">
+            <div class="dish-name">Poulet rôti du dimanche</div>
+            <div class="dish-price">17 €</div>
+          </div>
+          <div class="dish-desc">Légumes de saison, jus réduit, gratin dauphinois</div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-header">
+            <div class="dish-name">Filet de cabillaud poché</div>
+            <div class="dish-price">18 €</div>
+          </div>
+          <div class="dish-desc">Beurre blanc citronné, haricots verts, pommes de terre</div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-header">
+            <div class="dish-name">Steak frites maison</div>
+            <div class="dish-price">19 €</div>
+          </div>
+          <div class="dish-desc">Entrecôte charolaise, frites fraîches, beurre maître d'hôtel</div>
+        </div>
+        <div class="dish-card vege">
+          <div class="dish-header">
+            <div class="dish-name">Gratin de courge et châtaigne</div>
+            <div class="dish-price">15 €</div>
+          </div>
+          <div class="dish-desc">Comté fondu, salade verte, vinaigrette moutarde</div>
+          <span class="dish-badge">Végétarien</span>
+        </div>
+        <div class="dish-card">
+          <div class="dish-header">
+            <div class="dish-name">Andouillette AAAAA grillée</div>
+            <div class="dish-price">17 €</div>
+          </div>
+          <div class="dish-desc">Sauce moutarde, frites ou gratin au choix</div>
+        </div>
+      </div>
+      <p class="carte-note">Formule midi : entrée + plat ou plat + dessert · 24 € · Du mardi au vendredi</p>
+    </div>
+
+    <!-- Desserts -->
+    <div class="menu-panel" id="t-desserts">
+      <div class="dishes-grid">
+        <div class="dish-card">
+          <div class="dish-header">
+            <div class="dish-name">Tarte Tatin maison</div>
+            <div class="dish-price">8 €</div>
+          </div>
+          <div class="dish-desc">Pommes caramélisées, crème fraîche épaisse</div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-header">
+            <div class="dish-name">Crème brûlée à la vanille</div>
+            <div class="dish-price">8 €</div>
+          </div>
+          <div class="dish-desc">Cassonade caramélisée à la minute</div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-header">
+            <div class="dish-name">Mousse au chocolat noir</div>
+            <div class="dish-price">7 €</div>
+          </div>
+          <div class="dish-desc">Chocolat Valrhona 70%, tuile croustillante</div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-header">
+            <div class="dish-name">Île flottante</div>
+            <div class="dish-price">7 €</div>
+          </div>
+          <div class="dish-desc">Crème anglaise, caramel coulant, amandes effilées</div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-header">
+            <div class="dish-name">Assiette de fromages</div>
+            <div class="dish-price">12 €</div>
+          </div>
+          <div class="dish-desc">Sélection affineurs Mons · 3 fromages, salade, noix</div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-header">
+            <div class="dish-name">Profiteroles maison</div>
+            <div class="dish-price">9 €</div>
+          </div>
+          <div class="dish-desc">Choux à la chantilly, sauce chocolat chaude</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vins -->
+    <div class="menu-panel" id="t-vins">
+      <div class="vins-layout">
+        <div class="vin-card">
+          <div class="vin-color-dot" style="background:#F5E6B0;border:1px solid #ddd;"></div>
+          <div class="vin-info">
+            <div class="vin-name">Mâcon-Villages Blanc</div>
+            <div class="vin-region">Domaine de la Bongran · Bourgogne 2022</div>
+          </div>
+          <div class="vin-price-wrap">
+            <div class="vin-price">7 € / 24 €</div>
+            <div class="vin-unit">verre / bouteille</div>
+          </div>
+        </div>
+        <div class="vin-card">
+          <div class="vin-color-dot" style="background:#C0392B;"></div>
+          <div class="vin-info">
+            <div class="vin-name">Crozes-Hermitage Rouge</div>
+            <div class="vin-region">Cave de Tain · Rhône 2021</div>
+          </div>
+          <div class="vin-price-wrap">
+            <div class="vin-price">8 € / 30 €</div>
+            <div class="vin-unit">verre / bouteille</div>
+          </div>
+        </div>
+        <div class="vin-card">
+          <div class="vin-color-dot" style="background:#E8B4B8;"></div>
+          <div class="vin-info">
+            <div class="vin-name">Côtes de Provence Rosé</div>
+            <div class="vin-region">Château Sainte Marguerite 2023</div>
+          </div>
+          <div class="vin-price-wrap">
+            <div class="vin-price">6 € / 22 €</div>
+            <div class="vin-unit">verre / bouteille</div>
+          </div>
+        </div>
+        <div class="vin-card">
+          <div class="vin-color-dot" style="background:#8B1A1A;"></div>
+          <div class="vin-info">
+            <div class="vin-name">Bourgogne Pinot Noir</div>
+            <div class="vin-region">Louis Jadot · Côte d'Or 2020</div>
+          </div>
+          <div class="vin-price-wrap">
+            <div class="vin-price">10 € / 38 €</div>
+            <div class="vin-unit">verre / bouteille</div>
+          </div>
+        </div>
+        <div class="vin-card">
+          <div class="vin-color-dot" style="background:#E8E0A0;border:1px solid #ddd;"></div>
+          <div class="vin-info">
+            <div class="vin-name">Beaujolais-Villages Nouveau</div>
+            <div class="vin-region">Georges Dubœuf · Beaujolais 2024</div>
+          </div>
+          <div class="vin-price-wrap">
+            <div class="vin-price">5 € / 18 €</div>
+            <div class="vin-unit">verre / bouteille</div>
+          </div>
+        </div>
+        <div class="vin-card">
+          <div class="vin-color-dot" style="background:#F4D9A0;border:1px solid #ddd;"></div>
+          <div class="vin-info">
+            <div class="vin-name">Champagne Brut NV</div>
+            <div class="vin-region">Billecart-Salmon · Marne</div>
+          </div>
+          <div class="vin-price-wrap">
+            <div class="vin-price">13 € / 55 €</div>
+            <div class="vin-unit">verre / bouteille</div>
+          </div>
+        </div>
+      </div>
+      <p class="carte-note">Carte des vins complète disponible sur place · Accord mets &amp; vins sur demande</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ SPÉCIALITÉS ══ -->
+<section class="specialites">
+  <div class="spec-inner">
+    <div class="spec-intro">
+      <span class="section-tag">Nos incontournables</span>
+      <h2>Ce qu'on fait<br><em>depuis toujours.</em></h2>
+      <p>Certains plats ne quittent jamais la carte. Les clients le demandent, on les garde.</p>
+    </div>
+    <div class="spec-list">
+      <div class="spec-item">
+        <div class="spec-item-icon">🥩</div>
+        <div class="spec-item-name">Bœuf bourguignon</div>
+        <div class="spec-item-desc">Mijoté 4h minimum. Servi depuis l'ouverture.</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-item-icon">🐌</div>
+        <div class="spec-item-name">Escargots persillés</div>
+        <div class="spec-item-desc">Beurre maison à l'ail et au persil plat.</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-item-icon">🍮</div>
+        <div class="spec-item-name">Île flottante</div>
+        <div class="spec-item-desc">La recette de Paulette, inchangée depuis 30 ans.</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-item-icon">🍷</div>
+        <div class="spec-item-name">Beaujolais du mois</div>
+        <div class="spec-item-desc">Un cru différent chaque mois, à prix doux.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ RÉSERVATION ══ -->
+<section class="reservation" id="reservation">
+  <div class="resa-inner">
+    <div class="resa-aside">
+      <span class="section-tag tag-terra">Réservation</span>
+      <h2>Retenez<br>votre table.</h2>
+      <p>On confirme par téléphone sous quelques heures. Pour les groupes de plus de 6 personnes, appelez-nous directement.</p>
+
+      <div class="resa-contact">
+        <a href="tel:+33478001234" class="contact-pill">
+          <div class="contact-pill-icon">📞</div>
+          <div>
+            <strong>04 78 00 12 34</strong>
+            Mar–Sam, 10h–14h et 18h–22h
+          </div>
+        </a>
+        <a href="mailto:contact@chezpaulette.fr" class="contact-pill">
+          <div class="contact-pill-icon">✉️</div>
+          <div>
+            <strong>contact@chezpaulette.fr</strong>
+            Réponse sous 4h
+          </div>
+        </a>
+        <a href="#localisation" class="contact-pill">
+          <div class="contact-pill-icon">📍</div>
+          <div>
+            <strong>12, rue Mercière · Lyon 2e</strong>
+            M° Bellecour (3 min)
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <form class="resa-form" id="resa-form">
+      <div class="form-row">
+        <div class="field">
+          <label for="f-prenom">Prénom</label>
+          <input type="text" id="f-prenom" placeholder="Marie" required>
+        </div>
+        <div class="field">
+          <label for="f-nom">Nom</label>
+          <input type="text" id="f-nom" placeholder="Dupont" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label for="f-tel">Téléphone</label>
+          <input type="tel" id="f-tel" placeholder="06 00 00 00 00" required>
+        </div>
+        <div class="field">
+          <label for="f-email">Email</label>
+          <input type="email" id="f-email" placeholder="marie@mail.com">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label for="f-date">Date souhaitée</label>
+          <input type="date" id="f-date" required>
+        </div>
+        <div class="field">
+          <label for="f-service">Service</label>
+          <select id="f-service">
+            <option value="" disabled selected>Choisir</option>
+            <option>Midi · 12h00–14h30</option>
+            <option>Soir · 19h30–22h30</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label for="f-couverts">Nombre de couverts</label>
+          <select id="f-couverts" required>
+            <option value="" disabled selected>Combien ?</option>
+            <option>1</option><option>2</option><option>3</option>
+            <option>4</option><option>5</option><option>6</option>
+            <option>7 et plus</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-occasion">Occasion</label>
+          <select id="f-occasion">
+            <option value="" disabled selected>Optionnel</option>
+            <option>Repas d'affaires</option>
+            <option>Anniversaire</option>
+            <option>Repas en famille</option>
+            <option>Autre</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row single">
+        <div class="field">
+          <label for="f-note">Message (allergies, demandes…)</label>
+          <textarea id="f-note" placeholder="Intolérance au gluten, chaise haute pour enfant…"></textarea>
+        </div>
+      </div>
+      <button type="submit" class="resa-submit">Envoyer ma demande</button>
+      <div id="resa-ok">Merci ! On vous rappelle pour confirmer.</div>
+    </form>
+  </div>
+</section>
+
+<!-- ══ LOCALISATION ══ -->
+<section class="localisation" id="localisation">
+  <div class="loc-top">
+    <span class="section-tag tag-terra">Nous trouver</span>
+    <h2>Où on est</h2>
+  </div>
+
+  <div class="loc-split">
+    <div class="loc-infos">
+
+      <div class="loc-block">
+        <span class="loc-label">Adresse</span>
+        <div class="loc-val">
+          12, rue Mercière<br>
+          69002 Lyon — Presqu'île<br><br>
+          <a href="https://maps.google.com/?q=12+rue+Mercière+Lyon" target="_blank">Ouvrir dans Google Maps ↗</a>
+        </div>
+      </div>
+
+      <div class="loc-block">
+        <span class="loc-label">Horaires</span>
+        <div class="hours-grid">
+          <div class="hour-line off"><span class="dj">Lundi</span><span class="hr">Fermé</span></div>
+          <div class="hour-line"><span class="dj">Mardi</span><span class="hr">12h–14h30 · 19h30–22h30</span></div>
+          <div class="hour-line"><span class="dj">Mercredi</span><span class="hr">12h–14h30 · 19h30–22h30</span></div>
+          <div class="hour-line"><span class="dj">Jeudi</span><span class="hr">12h–14h30 · 19h30–22h30</span></div>
+          <div class="hour-line"><span class="dj">Vendredi</span><span class="hr">12h–14h30 · 19h30–22h30</span></div>
+          <div class="hour-line"><span class="dj">Samedi</span><span class="hr">12h–14h30 · 19h30–23h00</span></div>
+          <div class="hour-line off"><span class="dj">Dimanche</span><span class="hr">Fermé</span></div>
+        </div>
+      </div>
+
+      <div class="loc-block">
+        <span class="loc-label">Transports</span>
+        <div class="metro-list">
+          <div class="metro-row">
+            <div class="metro-badge" style="background:#D4373C;">A</div>
+            Ligne A · Bellecour (3 min à pied)
+          </div>
+          <div class="metro-row">
+            <div class="metro-badge" style="background:#F7A600;">B</div>
+            Ligne B · Bellecour (4 min à pied)
+          </div>
+          <div class="metro-row" style="font-size:0.82rem;color:var(--ink3);">
+            🚲 Vélo'v · Station Mercière (1 min)
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="loc-map">
+      <iframe
+        src="https://www.openstreetmap.org/export/embed.html?bbox=4.8220%2C45.7540%2C4.8380%2C45.7630&layer=mapnik&marker=45.7584%2C4.8305"
+        allowfullscreen
+        loading="lazy"
+        title="Chez Paulette — Lyon 2e, rue Mercière">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand-name">Chez Paulette</div>
+      <div class="footer-brand-desc">Bistrot traditionnel depuis 1994. La cuisine de tous les jours, faite avec amour.</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <a href="#concept" class="footer-col-link">Le bistrot</a>
+      <a href="#carte" class="footer-col-link">La carte</a>
+      <a href="#reservation" class="footer-col-link">Réserver</a>
+      <a href="#localisation" class="footer-col-link">Accès</a>
+    </div>
+    <div>
+      <div class="footer-col-title">Horaires</div>
+      <a class="footer-col-link">Mar–Ven : 12h–22h30</a>
+      <a class="footer-col-link">Samedi : 12h–23h00</a>
+      <a class="footer-col-link" style="color:#444;">Lun & Dim : Fermé</a>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <a href="tel:+33478001234" class="footer-col-link">04 78 00 12 34</a>
+      <a href="mailto:contact@chezpaulette.fr" class="footer-col-link">contact@chezpaulette.fr</a>
+      <a class="footer-col-link" style="color:#444;">12, rue Mercière · Lyon 2e</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Chez Paulette · Tous droits réservés</span>
+    <span><a href="#" style="color:#444;transition:color 0.2s;" onmouseover="this.style.color='#C05A35'" onmouseout="this.style.color='#444'">Mentions légales</a></span>
+  </div>
+</footer>
+
+<script>
+// Nav shadow
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('up', window.scrollY > 40);
+}, { passive: true });
+
+// Tabs
+function switchTab(btn, id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+// Form
+document.getElementById('resa-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  this.querySelectorAll('input,select,textarea,button').forEach(el => el.disabled = true);
+  document.getElementById('resa-ok').style.display = 'block';
+});
+
+// Date min
+const d = document.getElementById('f-date');
+if (d) d.min = new Date().toISOString().split('T')[0];
+</script>
+
+</body>
+</html>

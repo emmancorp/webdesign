@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAISON KAREV — Coiffeur Paris</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+
+/* ── TOKENS ── */
+:root {
+  --bg:       #0a0a0a;
+  --bg2:      #0f0f0f;
+  --bg3:      #161616;
+  --ink:      #f0ebe3;
+  --ink2:     #9a9088;
+  --ink3:     #4a4440;
+  --gold:     #c9a96e;
+  --gold-dim: #6a5530;
+  --border:   #1e1e1e;
+  --border2:  #2a2a2a;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--gold); color: #0a0808; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border2); }
+
+/* ── NAVIGATION ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.4rem 3.5rem;
+  border-bottom: 1px solid transparent;
+  transition: background 0.4s, border-color 0.4s;
+}
+
+nav.scrolled {
+  background: rgba(10, 10, 10, 0.95);
+  border-color: var(--border);
+  backdrop-filter: blur(10px);
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.nav-links a {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink2);
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--ink); }
+
+.nav-cta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold) !important;
+  border: 1px solid var(--gold-dim);
+  padding: 0.55rem 1.2rem;
+  transition: background 0.2s, border-color 0.2s !important;
+}
+
+.nav-cta:hover {
+  background: rgba(201, 169, 110, 0.08) !important;
+  border-color: var(--gold) !important;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 3.5rem 5rem;
+  overflow: hidden;
+}
+
+/* background grain texture */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* golden hairline — the signature element: a single horizontal gold line
+   cutting across the hero, like a blade */
+.hero-blade {
+  position: absolute;
+  top: 46%;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--gold) 20%, var(--gold) 80%, transparent 100%);
+  opacity: 0.35;
+  z-index: 1;
+  animation: blade-in 1.8s ease 0.5s both;
+}
+
+@keyframes blade-in {
+  from { opacity: 0; transform: scaleX(0); }
+  to   { opacity: 0.35; transform: scaleX(1); }
+}
+
+.hero-eyebrow {
+  position: relative; z-index: 2;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  animation: fade-up 1s ease 0.2s both;
+}
+
+.hero-title {
+  position: relative; z-index: 2;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(4.5rem, 12vw, 10.5rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  animation: fade-up 1s ease 0.35s both;
+}
+
+.hero-title strong {
+  font-weight: 600;
+  font-style: normal;
+  display: block;
+}
+
+.hero-footer {
+  position: relative; z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: 4rem;
+  animation: fade-up 1s ease 0.6s both;
+}
+
+.hero-desc {
+  max-width: 38ch;
+  font-size: 0.88rem;
+  color: var(--ink2);
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+.hero-address {
+  text-align: right;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  line-height: 2.1;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 2.5rem; left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  animation: fade-up 1s ease 1s both;
+}
+
+.hero-scroll span {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  display: block;
+  animation: scroll-pulse 2s ease infinite;
+}
+
+@keyframes scroll-pulse {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 1; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── WRAP ── */
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 3.5rem; }
+
+/* ── SECTION LABEL ── */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 4rem;
+}
+
+.section-label::before {
+  content: '';
+  display: block;
+  width: 30px; height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+.section-label span {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ── SERVICES ── */
+.services {
+  padding: 8rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.services-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+}
+
+.services-intro h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 4vw, 3.8rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+
+.services-intro h2 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.services-intro p {
+  font-size: 0.88rem;
+  color: var(--ink2);
+  line-height: 1.85;
+  max-width: 38ch;
+}
+
+/* vertical service list — editorial style, not a card grid */
+.service-list { display: flex; flex-direction: column; }
+
+.service-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border);
+  cursor: default;
+  transition: padding-left 0.3s;
+}
+
+.service-item:first-child { border-top: 1px solid var(--border); }
+.service-item:hover { padding-left: 0.8rem; }
+
+.service-left { flex: 1; }
+
+.service-cat {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.3rem;
+}
+
+.service-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.service-right { text-align: right; flex-shrink: 0; }
+
+.service-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ink2);
+}
+
+.service-duration {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  color: var(--ink3);
+  margin-top: 0.1rem;
+}
+
+/* ── PHILOSOPHY ── */
+.philosophy {
+  padding: 8rem 0;
+  border-top: 1px solid var(--border);
+  background: var(--bg2);
+}
+
+.philosophy-inner {
+  max-width: 820px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.9rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.3;
+  color: var(--ink);
+  padding: 0 2rem;
+  position: relative;
+}
+
+.blockquote::before {
+  content: '«';
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5rem;
+  color: var(--gold);
+  opacity: 0.2;
+  line-height: 1;
+  margin-bottom: -1rem;
+}
+
+.blockquote-attr {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-top: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.blockquote-attr::before,
+.blockquote-attr::after {
+  content: '';
+  display: block;
+  width: 30px; height: 1px;
+  background: var(--border2);
+}
+
+/* ── TEAM ── */
+.team {
+  padding: 8rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 0;
+}
+
+.team-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  padding: 2.5rem 2rem;
+  transition: border-color 0.3s;
+}
+
+.team-card:hover { border-color: var(--gold-dim); }
+
+.team-initials {
+  width: 48px; height: 48px;
+  border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--gold);
+  margin-bottom: 2rem;
+}
+
+.team-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+
+.team-role {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.2rem;
+}
+
+.team-bio {
+  font-size: 0.83rem;
+  color: var(--ink2);
+  line-height: 1.8;
+}
+
+.team-since {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  color: var(--ink3);
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border);
+}
+
+/* ── BOOKING ── */
+.booking {
+  padding: 8rem 0;
+  border-top: 1px solid var(--border);
+  background: var(--bg2);
+}
+
+.booking-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+}
+
+.booking-intro h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+
+.booking-info {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.info-block {}
+.info-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+}
+
+.info-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  color: var(--ink);
+}
+
+.info-value a:hover { color: var(--gold); }
+
+/* form */
+.form { display: flex; flex-direction: column; gap: 1rem; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+.field { display: flex; flex-direction: column; gap: 0.4rem; }
+
+.field label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink3);
+}
+
+.field input,
+.field select,
+.field textarea {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 300;
+  padding: 0.85rem 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0;
+  resize: vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--gold-dim);
+}
+
+.field select option { background: var(--bg3); }
+
+.field textarea { min-height: 100px; }
+
+.btn-submit {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: transparent;
+  border: 1px solid var(--gold-dim);
+  padding: 1rem 2rem;
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s;
+  align-self: flex-start;
+  margin-top: 0.5rem;
+}
+
+.btn-submit:hover {
+  background: rgba(201, 169, 110, 0.1);
+  border-color: var(--gold);
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 3rem 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink2);
+}
+
+.footer-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.footer-links a {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--ink); }
+
+.footer-copy {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  color: var(--ink3);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero { padding: 0 1.5rem 4rem; }
+  .hero-footer { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  .hero-address { text-align: left; }
+  .wrap { padding: 0 1.5rem; }
+  .services-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .team-grid { grid-template-columns: 1fr; }
+  .booking-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .form-row { grid-template-columns: 1fr; }
+  footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav id="nav">
+  <div class="nav-logo">Maison Karev</div>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#equipe">L'équipe</a>
+    <a href="#reservation" class="nav-cta">Réserver</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-blade"></div>
+  <p class="hero-eyebrow">Paris, depuis 2009</p>
+  <h1 class="hero-title">
+    L'art<br>
+    <strong>du geste</strong><br>
+    juste.
+  </h1>
+  <div class="hero-footer">
+    <p class="hero-desc">
+      Chaque coupe est une conversation entre la main qui tient les ciseaux
+      et la matière qui s'offre à elle. Nous ne coiffons pas — nous sculptons.
+    </p>
+    <div class="hero-address">
+      14, rue du Bac · Paris 7e<br>
+      Lun–Sam · 09h–19h<br>
+      +33 1 42 86 00 00
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span></span>
+    Défiler
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="services-inner">
+      <div class="services-intro">
+        <div class="section-label"><span>Nos prestations</span></div>
+        <h2>Un soin<br><em>pensé</em><br>pour vous.</h2>
+        <p>
+          De la coupe structurée à la couleur posée à la main,
+          chaque prestation est conçue comme un moment à part entière —
+          pas une procédure, mais un rituel.
+        </p>
+      </div>
+
+      <div class="service-list">
+
+        <div class="service-item">
+          <div class="service-left">
+            <div class="service-cat">Coupes</div>
+            <div class="service-name">Coupe femme</div>
+          </div>
+          <div class="service-right">
+            <div class="service-price">À partir de 65 €</div>
+            <div class="service-duration">45 min</div>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-left">
+            <div class="service-cat">Coupes</div>
+            <div class="service-name">Coupe homme</div>
+          </div>
+          <div class="service-right">
+            <div class="service-price">À partir de 45 €</div>
+            <div class="service-duration">30 min</div>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-left">
+            <div class="service-cat">Couleur</div>
+            <div class="service-name">Balayage lumière</div>
+          </div>
+          <div class="service-right">
+            <div class="service-price">À partir de 120 €</div>
+            <div class="service-duration">1h30</div>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-left">
+            <div class="service-cat">Couleur</div>
+            <div class="service-name">Couleur pleine</div>
+          </div>
+          <div class="service-right">
+            <div class="service-price">À partir de 90 €</div>
+            <div class="service-duration">1h15</div>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-left">
+            <div class="service-cat">Soin</div>
+            <div class="service-name">Soin kératine</div>
+          </div>
+          <div class="service-right">
+            <div class="service-price">À partir de 140 €</div>
+            <div class="service-duration">2h</div>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-left">
+            <div class="service-cat">Rituel</div>
+            <div class="service-name">Expérience Maison</div>
+          </div>
+          <div class="service-right">
+            <div class="service-price">250 €</div>
+            <div class="service-duration">3h</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PHILOSOPHY ── -->
+<section class="philosophy">
+  <div class="wrap">
+    <div class="philosophy-inner">
+      <div class="section-label" style="justify-content:center;"><span>Notre philosophie</span></div>
+      <blockquote class="blockquote">
+        Le bon coiffeur écoute deux fois avant de couper une seule fois.
+        Tout commence dans le silence d'une première rencontre.
+      </blockquote>
+      <div class="blockquote-attr">Maison Karev · Paris</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TEAM ── -->
+<section class="team" id="equipe">
+  <div class="wrap">
+    <div class="section-label"><span>L'équipe</span></div>
+    <div class="team-grid">
+
+      <div class="team-card">
+        <div class="team-initials">AK</div>
+        <div class="team-name">Adrien Karev</div>
+        <div class="team-role">Fondateur · Directeur artistique</div>
+        <p class="team-bio">
+          Formé à Londres et à Tokyo, Adrien a fondé la maison en 2009
+          après dix ans aux côtés des plus grands noms de la coiffure parisienne.
+          Sa signature : des coupes qui durent.
+        </p>
+        <div class="team-since">Dans la maison depuis 2009</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-initials">SL</div>
+        <div class="team-name">Sofia Lemarié</div>
+        <div class="team-role">Coloriste principale</div>
+        <p class="team-bio">
+          Coloriste formée à L'Oréal Professionnel, spécialiste du balayage main levée
+          et de la correction de couleur. Elle lit chaque chevelure comme une partition.
+        </p>
+        <div class="team-since">Dans la maison depuis 2014</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-initials">RM</div>
+        <div class="team-name">Raphaël Morin</div>
+        <div class="team-role">Coiffeur — Spécialiste homme</div>
+        <p class="team-bio">
+          Passé par les plus grandes barbershops de Barcelone et Berlin, Raphaël
+          a développé une approche millimétrée des coupes masculines classiques et contemporaines.
+        </p>
+        <div class="team-since">Dans la maison depuis 2018</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── BOOKING ── -->
+<section class="booking" id="reservation">
+  <div class="wrap">
+    <div class="booking-inner">
+      <div class="booking-intro">
+        <div class="section-label"><span>Réservation</span></div>
+        <h2>Prenez<br>rendez-vous.</h2>
+        <p style="font-size:0.88rem;color:var(--ink2);line-height:1.85;">
+          Nous confirmons chaque réservation par téléphone sous 24h.
+          Pour les demandes urgentes, appelez-nous directement.
+        </p>
+        <div class="booking-info">
+          <div class="info-block">
+            <div class="info-label">Adresse</div>
+            <div class="info-value">14, rue du Bac — Paris 7e</div>
+          </div>
+          <div class="info-block">
+            <div class="info-label">Horaires</div>
+            <div class="info-value">Lundi–Samedi · 09h00–19h00</div>
+          </div>
+          <div class="info-block">
+            <div class="info-label">Téléphone</div>
+            <div class="info-value"><a href="tel:+33142860000">+33 1 42 86 00 00</a></div>
+          </div>
+          <div class="info-block">
+            <div class="info-label">Email</div>
+            <div class="info-value"><a href="mailto:contact@maisonkarev.fr">contact@maisonkarev.fr</a></div>
+          </div>
+        </div>
+      </div>
+
+      <form class="form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="field">
+            <label for="prenom">Prénom</label>
+            <input type="text" id="prenom" placeholder="Votre prénom">
+          </div>
+          <div class="field">
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" placeholder="Votre nom">
+          </div>
+        </div>
+        <div class="field">
+          <label for="tel">Téléphone</label>
+          <input type="tel" id="tel" placeholder="+33 6 00 00 00 00">
+        </div>
+        <div class="field">
+          <label for="service">Prestation souhaitée</label>
+          <select id="service">
+            <option value="" disabled selected>Choisissez une prestation</option>
+            <option>Coupe femme</option>
+            <option>Coupe homme</option>
+            <option>Balayage lumière</option>
+            <option>Couleur pleine</option>
+            <option>Soin kératine</option>
+            <option>Expérience Maison</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="date">Date souhaitée</label>
+            <input type="date" id="date">
+          </div>
+          <div class="field">
+            <label for="heure">Créneau préféré</label>
+            <select id="heure">
+              <option value="" disabled selected>Choisissez</option>
+              <option>Matin (09h–12h)</option>
+              <option>Après-midi (12h–16h)</option>
+              <option>Fin de journée (16h–19h)</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="message">Message (optionnel)</label>
+          <textarea id="message" placeholder="Décrivez votre demande, vos attentes…"></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Envoyer la demande</button>
+        <div id="form-confirm" style="display:none;font-family:'IBM Plex Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;color:var(--gold);margin-top:0.5rem;">
+          ✓ Demande envoyée — nous vous recontactons sous 24h.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">Maison Karev</div>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#equipe">Équipe</a>
+    <a href="#">Mentions légales</a>
+  </div>
+  <div class="footer-copy">© 2025 Maison Karev · Paris</div>
+</footer>
+
+<script>
+// Nav transparente qui se remplit au scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Formulaire
+function handleSubmit(e) {
+  e.preventDefault();
+  document.getElementById('form-confirm').style.display = 'block';
+  e.target.querySelectorAll('input,select,textarea,button').forEach(el => el.disabled = true);
+}
+</script>
+
+</body>
+</html>

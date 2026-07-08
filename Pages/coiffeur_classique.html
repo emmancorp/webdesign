@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maison Rive — Salon de coiffure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --noir: #1B1815;
+    --ivoire: #F7F2E9;
+    --blanc: #FFFFFF;
+    --bronze: #A9834B;
+    --bronze-dark: #8A6A38;
+    --taupe: #746C60;
+    --ligne: #DCD0B8;
+    --maxw: 1180px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--ivoire);
+    color: var(--noir);
+    font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3, .display{
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  a{ color: inherit; text-decoration: none; }
+  img{ max-width:100%; display:block; }
+  .wrap{ max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
+  section{ padding: 96px 0; }
+  .eyebrow{
+    display:block;
+    font-size: 12.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--bronze-dark);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding: 15px 28px;
+    border-radius: 2px;
+    font-size: 14.5px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border: 1px solid transparent;
+    cursor:pointer;
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .btn-primary{ background: var(--noir); color: var(--ivoire); }
+  .btn-primary:hover{ background: var(--bronze-dark); }
+  .btn-ghost{ border-color: var(--noir); color: var(--noir); background:transparent; }
+  .btn-ghost:hover{ background: var(--noir); color: var(--ivoire); }
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--bronze-dark);
+    outline-offset: 3px;
+  }
+
+  /* --- Comb-line signature motif --- */
+  .comb{
+    display:flex;
+    align-items:flex-end;
+    gap: 6px;
+    height: 34px;
+  }
+  .comb span{
+    display:block;
+    width: 2px;
+    background: var(--bronze);
+    opacity: .55;
+  }
+  .comb.dark span{ background: var(--ivoire); opacity:.5; }
+
+  /* --- Header --- */
+  header{
+    position: fixed;
+    top:0; left:0; right:0;
+    z-index: 50;
+    padding: 22px 0;
+    transition: background .3s ease, padding .3s ease, box-shadow .3s ease;
+  }
+  header .wrap{ display:flex; align-items:center; justify-content:space-between; }
+  header.scrolled{
+    background: rgba(247,242,233,0.92);
+    backdrop-filter: blur(6px);
+    padding: 14px 0;
+    box-shadow: 0 1px 0 var(--ligne);
+  }
+  .logo{ font-family:'Fraunces', serif; font-size: 21px; font-weight:600; letter-spacing:0.02em; }
+  .logo small{ display:block; font-family:'Work Sans',sans-serif; font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--taupe); font-weight:500; margin-top:2px; }
+  nav ul{ list-style:none; display:flex; gap:36px; margin:0; padding:0; }
+  nav a{ font-size: 14.5px; font-weight:500; position:relative; }
+  nav a::after{
+    content:""; position:absolute; left:0; bottom:-5px; width:0; height:1px;
+    background: var(--bronze-dark); transition: width .25s ease;
+  }
+  nav a:hover::after{ width:100%; }
+  .header-actions{ display:flex; align-items:center; gap:22px; }
+  .header-phone{ font-size:14px; font-weight:500; display:flex; align-items:center; gap:8px; }
+  .menu-toggle{ display:none; background:none; border:none; cursor:pointer; }
+
+  /* --- Hero --- */
+  .hero{
+    position: relative;
+    padding: 200px 0 120px;
+    overflow: hidden;
+    background: var(--ivoire);
+  }
+  .hero-combs{
+    position:absolute; inset:0; pointer-events:none;
+    display:flex; align-items:flex-start; justify-content:space-between;
+    padding: 0 32px;
+    opacity: 0.9;
+  }
+  .hero-combs span{
+    width:1px; background: var(--ligne);
+  }
+  .hero-grid{
+    position:relative;
+    display:grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 64px;
+    align-items:center;
+  }
+  .hero h1{
+    font-size: clamp(40px, 5.4vw, 68px);
+    line-height: 1.05;
+  }
+  .hero h1 em{ font-style:italic; color: var(--bronze-dark); }
+  .hero p.lead{
+    max-width: 480px;
+    margin-top: 26px;
+    font-size: 17.5px;
+    color: #3d3833;
+  }
+  .hero-ctas{ display:flex; gap:16px; margin-top:40px; flex-wrap:wrap; }
+  .hero-note{
+    margin-top: 46px;
+    display:flex; align-items:center; gap:16px;
+    font-size: 13.5px; color: var(--taupe);
+  }
+  .hero-note .comb{ height:22px; }
+
+  .hero-art{
+    position:relative;
+    aspect-ratio: 4/5;
+    background: var(--noir);
+    border-radius: 2px;
+    overflow:hidden;
+    display:flex; align-items:flex-end;
+  }
+  .hero-art svg{ width:100%; height:100%; position:absolute; inset:0; }
+  .hero-art-caption{
+    position:relative; z-index:2;
+    padding: 26px 28px;
+    color: var(--ivoire);
+  }
+  .hero-art-caption .eyebrow{ color: var(--bronze); }
+  .hero-art-caption p{ font-family:'Fraunces',serif; font-size:19px; margin:0; max-width:240px; }
+
+  /* --- Intro / philosophy --- */
+  .philo{ border-top: 1px solid var(--ligne); border-bottom: 1px solid var(--ligne); }
+  .philo .wrap{ display:grid; grid-template-columns: 0.9fr 1.1fr; gap: 72px; }
+  .philo h2{ font-size: clamp(28px, 3.2vw, 38px); line-height:1.15; }
+  .philo-text p{ font-size: 16.5px; color:#3d3833; margin: 0 0 18px; }
+  .philo-text p:last-child{ margin-bottom:0; }
+
+  /* --- Services --- */
+  .services-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:56px; flex-wrap:wrap; }
+  .services-head h2{ font-size: clamp(28px,3.2vw,38px); max-width:520px; }
+  .services-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--ligne); border:1px solid var(--ligne); }
+  .service-card{
+    background: var(--ivoire);
+    padding: 40px 36px;
+    transition: background .25s ease;
+  }
+  .service-card:hover{ background: var(--blanc); }
+  .service-top{ display:flex; justify-content:space-between; align-items:baseline; gap:16px; margin-bottom:14px; }
+  .service-card h3{ font-size: 22px; }
+  .service-price{ font-size:13.5px; color: var(--bronze-dark); font-weight:600; white-space:nowrap; }
+  .service-card p{ color:#4a453f; font-size:15px; margin:0; }
+
+  /* --- Process --- */
+  .process{ background: var(--noir); color: var(--ivoire); }
+  .process .eyebrow{ color: var(--bronze); }
+  .process h2{ color: var(--ivoire); font-size: clamp(28px,3.2vw,38px); max-width:560px; }
+  .process-list{ margin-top: 60px; display:grid; grid-template-columns: repeat(3,1fr); gap:48px; }
+  .process-item .num{ font-family:'Fraunces',serif; font-size:15px; color: var(--bronze); letter-spacing:0.08em; }
+  .process-item h3{ font-size:20px; margin: 18px 0 12px; color: var(--ivoire); }
+  .process-item p{ color: #C9C2B6; font-size:15px; margin:0; }
+  .process-divider{ margin: 56px 0 0; }
+
+  /* --- Team --- */
+  .team-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 44px; margin-top: 56px; }
+  .team-card{ text-align:left; }
+  .avatar{
+    width:100%; aspect-ratio: 1/1.05;
+    background: linear-gradient(155deg, #2a2521, var(--noir));
+    border-radius: 2px;
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom: 20px;
+    position:relative;
+    overflow:hidden;
+  }
+  .avatar span{ font-family:'Fraunces',serif; font-size:15px; letter-spacing:0.05em; color: var(--bronze); position:relative; z-index:2; }
+  .team-card h3{ font-size:19px; }
+  .team-role{ font-size:13px; color: var(--bronze-dark); font-weight:600; letter-spacing:0.04em; text-transform:uppercase; margin: 6px 0 12px; }
+  .team-card p{ font-size:14.5px; color:#4a453f; margin:0; }
+
+  /* --- Testimonials --- */
+  .testimonials{ background: var(--blanc); border-top:1px solid var(--ligne); border-bottom:1px solid var(--ligne); }
+  .testi-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap:1px; background: var(--ligne); border:1px solid var(--ligne); margin-top:56px; }
+  .testi-card{ background: var(--blanc); padding: 36px 32px; }
+  .testi-card p.quote{ font-family:'Fraunces',serif; font-size:18px; font-style:italic; line-height:1.5; margin:0 0 18px; }
+  .testi-card .who{ font-size:13.5px; color: var(--taupe); font-weight:500; }
+
+  /* --- Contact / footer --- */
+  .contact{ background: var(--ivoire); }
+  .contact .wrap{ display:grid; grid-template-columns: 1fr 1fr; gap:64px; }
+  .contact h2{ font-size: clamp(28px,3.2vw,38px); margin-bottom:28px; }
+  .info-row{ display:flex; gap:18px; padding: 18px 0; border-top:1px solid var(--ligne); }
+  .info-row:last-child{ border-bottom:1px solid var(--ligne); }
+  .info-row .label{ width:110px; flex-shrink:0; font-size:12.5px; text-transform:uppercase; letter-spacing:0.1em; color: var(--bronze-dark); font-weight:600; padding-top:2px; }
+  .info-row .val{ font-size:15.5px; }
+  .info-row .val span{ display:block; color: var(--taupe); font-size:13.5px; margin-top:2px; }
+  .map-box{
+    background: var(--noir);
+    border-radius: 2px;
+    aspect-ratio: 4/3.4;
+    position:relative;
+    overflow:hidden;
+    display:flex; align-items:flex-end;
+  }
+  .map-box svg{ position:absolute; inset:0; width:100%; height:100%; opacity:.5; }
+  .map-caption{ position:relative; z-index:2; padding:24px; color:var(--ivoire); font-size:14px; }
+  .map-caption strong{ font-family:'Fraunces',serif; font-weight:500; font-size:17px; display:block; margin-bottom:4px; }
+
+  footer{ background: var(--noir); color: var(--ivoire); padding: 48px 0 36px; }
+  footer .wrap{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; }
+  .foot-links{ display:flex; gap:28px; list-style:none; padding:0; margin:0; }
+  .foot-links a{ font-size:13.5px; color:#C9C2B6; }
+  .foot-links a:hover{ color: var(--ivoire); }
+  .foot-legal{ font-size:12.5px; color:#7d766b; margin-top:6px; }
+
+  /* --- Mobile nav panel --- */
+  .mobile-nav{
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: var(--noir);
+    color: var(--ivoire);
+    display: flex;
+    flex-direction: column;
+    padding: 24px 28px 40px;
+    transform: translateX(100%);
+    transition: transform .32s ease;
+    overflow-y: auto;
+  }
+  .mobile-nav.open{ transform: translateX(0); }
+  .mobile-nav-top{ display:flex; justify-content:space-between; align-items:center; margin-bottom: 48px; }
+  .mobile-nav-top .logo{ color: var(--ivoire); }
+  .mobile-nav-top .logo small{ color:#B7AE9E; }
+  .mobile-close{ background:none; border:none; color: var(--ivoire); font-size: 26px; line-height:1; cursor:pointer; padding: 8px; }
+  .mobile-nav ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  .mobile-nav ul li{ border-bottom: 1px solid rgba(247,242,233,0.12); }
+  .mobile-nav ul a{ display:block; padding: 18px 2px; font-family:'Fraunces', serif; font-size: 24px; font-weight:500; }
+  .mobile-nav-foot{ margin-top: auto; padding-top: 32px; display:flex; flex-direction:column; gap: 16px; }
+  .mobile-nav-foot .header-phone{ display:flex !important; color:#C9C2B6; font-size:15px; }
+  .mobile-nav-foot .btn-primary{ text-align:center; justify-content:center; }
+  body.nav-open{ overflow: hidden; }
+
+  @media (max-width: 880px){
+    nav, .header-phone, header .header-actions .btn-primary{ display:none; }
+    .menu-toggle{ display:block; }
+    .hero{ padding-top: 140px; }
+    .hero-grid{ grid-template-columns: 1fr; gap: 44px; }
+    .hero-art{ aspect-ratio: 16/10; }
+    .hero-combs{ display:none; }
+    .philo .wrap, .contact .wrap{ grid-template-columns: 1fr; gap:36px; }
+    .services-grid, .team-grid, .process-list, .testi-grid{ grid-template-columns: 1fr; }
+    section{ padding: 64px 0; }
+    .process-list{ gap: 36px; }
+    footer .wrap{ flex-direction:column; align-items:flex-start; gap:24px; }
+    .foot-links{ flex-wrap:wrap; row-gap:10px; }
+  }
+
+  @media (max-width: 560px){
+    .wrap{ padding: 0 20px; }
+    section{ padding: 52px 0; }
+    .hero{ padding-top: 128px; padding-bottom: 72px; }
+    .hero h1{ font-size: clamp(32px, 9vw, 40px); }
+    .hero p.lead{ font-size: 16px; }
+    .hero-ctas{ flex-direction: column; align-items: stretch; }
+    .hero-ctas .btn{ justify-content:center; }
+    .hero-note{ flex-wrap:wrap; }
+    .services-head{ flex-direction:column; align-items:flex-start; gap:16px; }
+    .service-card{ padding: 30px 24px; }
+    .service-top{ flex-direction:column; align-items:flex-start; gap:6px; }
+    .testi-card{ padding: 28px 24px; }
+    .contact .hero-ctas{ flex-direction:column; }
+    .info-row{ flex-direction:column; gap:4px; }
+    .info-row .label{ width:auto; }
+    .logo{ font-size: 18px; }
+    header.scrolled{ padding: 12px 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <div class="wrap">
+    <a href="#top" class="logo">Maison Rive<small>Salon de coiffure — Paris</small></a>
+    <nav>
+      <ul>
+        <li><a href="#prestations">Prestations</a></li>
+        <li><a href="#savoir-faire">Savoir-faire</a></li>
+        <li><a href="#equipe">L'équipe</a></li>
+        <li><a href="#avis">Avis</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <span class="header-phone">01 45 67 89 10</span>
+      <a href="#contact" class="btn btn-primary">Prendre rendez-vous</a>
+      <button class="menu-toggle" id="menu-open" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-nav">☰</button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobile-nav">
+  <div class="mobile-nav-top">
+    <span class="logo">Maison Rive<small>Salon de coiffure — Paris</small></span>
+    <button class="mobile-close" id="menu-close" aria-label="Fermer le menu">✕</button>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#prestations" class="mobile-link">Prestations</a></li>
+      <li><a href="#savoir-faire" class="mobile-link">Savoir-faire</a></li>
+      <li><a href="#equipe" class="mobile-link">L'équipe</a></li>
+      <li><a href="#avis" class="mobile-link">Avis</a></li>
+      <li><a href="#contact" class="mobile-link">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="mobile-nav-foot">
+    <span class="header-phone">☎ 01 45 67 89 10</span>
+    <a href="#contact" class="btn btn-primary mobile-link">Prendre rendez-vous</a>
+  </div>
+</div>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-combs" aria-hidden="true">
+      <span style="height:120px"></span><span style="height:60px"></span><span style="height:150px"></span>
+      <span style="height:80px"></span><span style="height:40px"></span><span style="height:130px"></span>
+      <span style="height:95px"></span><span style="height:55px"></span><span style="height:140px"></span>
+      <span style="height:70px"></span><span style="height:110px"></span><span style="height:50px"></span>
+    </div>
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Salon de coiffure — Paris 6e</span>
+        <h1>La coiffure comme<br><em>un art du détail.</em></h1>
+        <p class="lead">Chez Maison Rive, chaque rendez-vous commence par une écoute attentive. Coupe, couleur et coiffage sur-mesure, pensés pour révéler votre nature plutôt que la transformer.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-primary">Prendre rendez-vous</a>
+          <a href="#prestations" class="btn btn-ghost">Voir nos prestations</a>
+        </div>
+        <div class="hero-note">
+          <span class="comb" aria-hidden="true">
+            <span style="height:100%"></span><span style="height:60%"></span><span style="height:85%"></span><span style="height:45%"></span><span style="height:75%"></span>
+          </span>
+          Du mardi au samedi, 9h – 19h. Sur rendez-vous.
+        </div>
+      </div>
+      <div class="hero-art">
+        <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#A9834B" stop-opacity="0.55"/>
+              <stop offset="1" stop-color="#1B1815" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <rect width="400" height="500" fill="url(#g1)"/>
+          <g stroke="#A9834B" stroke-opacity="0.5" fill="none" stroke-width="1.4">
+            <path d="M40 480 C 60 300, 20 220, 80 40"/>
+            <path d="M90 490 C 100 320, 60 240, 130 30"/>
+            <path d="M150 500 C 150 340, 110 260, 190 50"/>
+            <path d="M220 500 C 210 350, 260 280, 230 60"/>
+            <path d="M290 500 C 270 340, 330 260, 290 60"/>
+            <path d="M350 490 C 320 330, 370 240, 330 40"/>
+          </g>
+        </svg>
+        <div class="hero-art-caption">
+          <span class="eyebrow">Notre matière</span>
+          <p>Chaque chevelure a son mouvement propre — notre travail est de le comprendre avant de le sculpter.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHIE -->
+  <section class="philo">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Un salon, une philosophie</span>
+        <h2>Une coiffure qui vous ressemble, pas qui vous transforme.</h2>
+      </div>
+      <div class="philo-text">
+        <p>Maison Rive est né d'une conviction simple : la plus belle coupe est celle qu'on oublie de remarquer, parce qu'elle semble avoir toujours été là. Nous prenons le temps du diagnostic avant chaque geste, pour composer avec la texture, la densité et le mouvement naturel de vos cheveux plutôt que contre eux.</p>
+        <p>Installé rue de Rennes depuis dix ans, notre salon reçoit sur rendez-vous dans un cadre pensé pour le calme : lumière douce, gestes précis, et une équipe formée aussi bien aux techniques classiques qu'aux colorations les plus contemporaines.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRESTATIONS -->
+  <section id="prestations">
+    <div class="wrap">
+      <div class="services-head">
+        <h2>Prestations</h2>
+        <a href="#contact" class="btn btn-ghost">Demander un devis</a>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-top"><h3>Coupe & Brushing</h3><span class="service-price">Dès 45 €</span></div>
+          <p>Une coupe précise, adaptée à la texture et au mouvement naturel de vos cheveux, suivie d'un brushing sur-mesure.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-top"><h3>Couleur & Balayage</h3><span class="service-price">Dès 75 €</span></div>
+          <p>Des techniques de coloration sur-mesure, du balayage lumineux aux teintes profondes, formulées selon votre carnation.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-top"><h3>Soins & Rituels</h3><span class="service-price">Dès 35 €</span></div>
+          <p>Des soins ciblés pour restaurer la fibre capillaire, raviver l'éclat et préparer le cheveu aux techniques suivantes.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-top"><h3>Coiffure événementielle</h3><span class="service-price">Sur devis</span></div>
+          <p>Chignons, tresses et mises en beauté pour vos mariages, soirées et moments qui comptent.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAVOIR-FAIRE / PROCESS -->
+  <section class="process" id="savoir-faire">
+    <div class="wrap">
+      <span class="eyebrow">Le déroulé d'un rendez-vous</span>
+      <h2>Trois temps, une seule attention.</h2>
+      <div class="process-list">
+        <div class="process-item">
+          <span class="num">01</span>
+          <h3>Diagnostic</h3>
+          <p>Un échange sur vos attentes, l'historique de vos cheveux et l'état actuel de la fibre capillaire.</p>
+        </div>
+        <div class="process-item">
+          <span class="num">02</span>
+          <h3>Réalisation</h3>
+          <p>Coupe, couleur ou soin exécuté avec précision, en ajustant chaque geste à ce que révèle le diagnostic.</p>
+        </div>
+        <div class="process-item">
+          <span class="num">03</span>
+          <h3>Finition</h3>
+          <p>Brushing, coiffage final et conseils d'entretien pour prolonger le résultat entre deux visites.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPE -->
+  <section id="equipe">
+    <div class="wrap">
+      <span class="eyebrow">L'équipe</span>
+      <h2>Trois paires de mains, une même exigence.</h2>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="avatar"><span>C. A.</span></div>
+          <h3>Claire Aubry</h3>
+          <div class="team-role">Fondatrice — Coupe & Direction artistique</div>
+          <p>Quinze ans de métier entre Paris et Londres, spécialisée dans les coupes structurées et les finitions naturelles.</p>
+        </div>
+        <div class="team-card">
+          <div class="avatar"><span>Y. B.</span></div>
+          <h3>Yasmine Belhadj</h3>
+          <div class="team-role">Coloriste</div>
+          <p>Experte en balayage et en formulation sur-mesure, attentive à préserver la santé du cheveu à chaque séance.</p>
+        </div>
+        <div class="team-card">
+          <div class="avatar"><span>T. M.</span></div>
+          <h3>Thomas Mercier</h3>
+          <div class="team-role">Coiffeur événementiel</div>
+          <p>Formé aux chignons et coiffures de cérémonie, il accompagne les mariées du salon depuis six ans.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVIS -->
+  <section class="testimonials" id="avis">
+    <div class="wrap">
+      <span class="eyebrow">Avis</span>
+      <h2>Ce qu'on nous dit après une visite.</h2>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <p class="quote">« Depuis que je viens chez Maison Rive, je n'ai plus jamais eu peur de couper mes cheveux. »</p>
+          <div class="who">Camille D.</div>
+        </div>
+        <div class="testi-card">
+          <p class="quote">« Un vrai moment de calme, et un résultat qui tient dans la durée. »</p>
+          <div class="who">Nadia F.</div>
+        </div>
+        <div class="testi-card">
+          <p class="quote">« L'équipe prend le temps d'expliquer chaque étape. On sort toujours rassurée. »</p>
+          <div class="who">Léa T.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Contact & horaires</span>
+        <h2>Venez nous rencontrer.</h2>
+        <div class="info-row">
+          <div class="label">Adresse</div>
+          <div class="val">12 rue de Rennes, 75006 Paris<span>Métro Saint-Sulpice, ligne 4</span></div>
+        </div>
+        <div class="info-row">
+          <div class="label">Téléphone</div>
+          <div class="val">01 45 67 89 10</div>
+        </div>
+        <div class="info-row">
+          <div class="label">Horaires</div>
+          <div class="val">Mardi – Samedi, 9h – 19h<span>Fermé dimanche et lundi</span></div>
+        </div>
+        <div class="hero-ctas" style="margin-top:32px;">
+          <a href="tel:0145678910" class="btn btn-primary">Appeler le salon</a>
+          <a href="mailto:contact@maisonrive.fr" class="btn btn-ghost">Écrire par e-mail</a>
+        </div>
+      </div>
+      <div class="map-box">
+        <svg viewBox="0 0 400 340" preserveAspectRatio="xMidYMid slice">
+          <g stroke="#A9834B" stroke-width="1" fill="none">
+            <path d="M0 60 H400 M0 140 H400 M0 220 H400 M0 300 H400"/>
+            <path d="M60 0 V340 M160 0 V340 M260 0 V340 M340 0 V340"/>
+          </g>
+          <circle cx="160" cy="140" r="6" fill="#A9834B"/>
+        </svg>
+        <div class="map-caption">
+          <strong>Maison Rive</strong>
+          12 rue de Rennes — 75006 Paris
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="logo" style="color:var(--ivoire);">Maison Rive</span>
+    <ul class="foot-links">
+      <li><a href="#prestations">Prestations</a></li>
+      <li><a href="#equipe">L'équipe</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#" onclick="return false;">Instagram</a></li>
+    </ul>
+  </div>
+  <div class="wrap" style="margin-top:8px;">
+    <span class="foot-legal">© 2026 Maison Rive — Tous droits réservés</span>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  const mobileNav = document.getElementById('mobile-nav');
+  const openBtn = document.getElementById('menu-open');
+  const closeBtn = document.getElementById('menu-close');
+
+  function openNav(){
+    mobileNav.classList.add('open');
+    document.body.classList.add('nav-open');
+    openBtn.setAttribute('aria-expanded', 'true');
+  }
+  function closeNav(){
+    mobileNav.classList.remove('open');
+    document.body.classList.remove('nav-open');
+    openBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  openBtn.addEventListener('click', openNav);
+  closeBtn.addEventListener('click', closeNav);
+  document.querySelectorAll('.mobile-link').forEach(el => el.addEventListener('click', closeNav));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeNav();
+  });
+</script>
+
+</body>
+</html>

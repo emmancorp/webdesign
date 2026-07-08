@@ -1,1 +1,1620 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emmanuel — Création de sites web</title>
+<link rel="icon" href="Images/logo_webdesign.png" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
 
+/* ══════════════════════════════════════
+   TOKENS
+══════════════════════════════════════ */
+:root {
+  --night:   #07090F;
+  --dark:    #0C0F1A;
+  --dark2:   #111420;
+  --dark3:   #161B28;
+  --card:    #131829;
+  --card2:   #181E30;
+
+  --blue:    #3B7BF8;
+  --blue-l:  #6B9DFA;
+  --blue-d:  #1A4BC4;
+  --blue-dim:#0F2A6E;
+  --blue-bg: rgba(59,123,248,0.07);
+  --blue-glow: rgba(59,123,248,0.18);
+
+  --white:   #EEF1FF;
+  --gray:    #5E677A;
+  --gray2:   #8A93A8;
+  --border:  #1C2238;
+  --border2: #232A40;
+
+  --f-display: 'Space Grotesk', sans-serif;
+  --f-body:    'Inter', sans-serif;
+  --f-mono:    'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--night);
+  color: var(--white);
+  font-family: var(--f-body);
+  font-weight: 300;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; }
+::selection { background: var(--blue); color: white; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--night); }
+::-webkit-scrollbar-thumb { background: var(--blue-dim); border-radius: 2px; }
+
+/* ══════════════════════════════════════
+   NAVIGATION
+══════════════════════════════════════ */
+nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 400;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3rem;
+  border-bottom: 1px solid transparent;
+  transition: background 0.35s, border-color 0.35s;
+}
+nav.solid {
+  background: rgba(7,9,15,0.94);
+  border-color: var(--border);
+  backdrop-filter: blur(16px);
+}
+
+.nav-logo {
+  font-family: var(--f-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.nav-logo-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 8px var(--blue);
+  animation: pulse 3s ease infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 6px var(--blue); }
+  50%       { box-shadow: 0 0 14px var(--blue-l); }
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+.nav-link {
+  font-family: var(--f-display);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--gray2);
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+  letter-spacing: 0.01em;
+}
+.nav-link:hover { color: var(--white); background: var(--blue-bg); }
+
+.nav-cta {
+  margin-left: 0.5rem;
+  font-family: var(--f-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: white;
+  background: var(--blue);
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.nav-cta:hover { background: var(--blue-l); box-shadow: 0 0 20px var(--blue-glow); }
+
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 8rem 3rem 6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* grid blueprint background */
+.hero-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.25;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  pointer-events: none;
+}
+
+/* blue glow orb */
+.hero-orb {
+  position: absolute;
+  top: 10%; right: 5%;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59,123,248,0.12) 0%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  animation: orb-drift 8s ease-in-out infinite alternate;
+}
+@keyframes orb-drift {
+  from { transform: translate(0,0) scale(1); }
+  to   { transform: translate(-40px, 40px) scale(1.1); }
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 5rem;
+  align-items: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--f-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--blue-l);
+  background: var(--blue-bg);
+  border: 1px solid var(--blue-dim);
+  padding: 0.35rem 0.9rem;
+  border-radius: 20px;
+  margin-bottom: 2rem;
+  animation: fadein 0.8s ease both;
+}
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 6px var(--blue);
+  flex-shrink: 0;
+}
+
+h1 {
+  font-family: var(--f-display);
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.025em;
+  color: var(--white);
+  margin-bottom: 1.6rem;
+  animation: fadein 0.8s ease 0.1s both;
+}
+h1 .blue { color: var(--blue-l); }
+h1 .outline {
+  -webkit-text-stroke: 1px rgba(238,241,255,0.3);
+  color: transparent;
+}
+
+.hero-desc {
+  font-size: 1rem;
+  color: var(--gray2);
+  line-height: 1.8;
+  max-width: 46ch;
+  margin-bottom: 2.5rem;
+  animation: fadein 0.8s ease 0.2s both;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  animation: fadein 0.8s ease 0.3s both;
+}
+
+.btn {
+  font-family: var(--f-display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.85rem 1.8rem;
+  cursor: pointer;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.22s;
+  letter-spacing: 0.01em;
+}
+.btn-blue { background: var(--blue); color: white; }
+.btn-blue:hover { background: var(--blue-l); box-shadow: 0 0 24px var(--blue-glow); transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: var(--gray2); border: 1px solid var(--border2); }
+.btn-ghost:hover { color: var(--white); border-color: var(--gray); }
+
+/* hero right — stats panel */
+.hero-stats {
+  animation: fadein 0.8s ease 0.35s both;
+}
+
+.stats-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.stat-item {
+  padding: 1.2rem;
+  background: var(--dark2);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  transition: border-color 0.2s;
+}
+.stat-item:hover { border-color: var(--blue-dim); }
+
+.stat-num {
+  font-family: var(--f-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--blue-l);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.stat-label {
+  font-size: 0.72rem;
+  color: var(--gray);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.tech-bar {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.tech-label {
+  font-family: var(--f-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 0.8rem;
+}
+.tech-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.tech-chip {
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  color: var(--blue-l);
+  background: var(--blue-bg);
+  border: 1px solid var(--blue-dim);
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+}
+
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════════════════
+   SHARED SECTION UTILITY
+══════════════════════════════════════ */
+.section {
+  padding: 7rem 3rem;
+  position: relative;
+}
+
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.mono-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--f-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--blue-l);
+  margin-bottom: 1rem;
+}
+.mono-tag::before {
+  content: '//';
+  color: var(--blue-dim);
+}
+
+h2 {
+  font-family: var(--f-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 0.8rem;
+}
+h2 .blue { color: var(--blue-l); }
+
+.section-sub {
+  font-size: 0.94rem;
+  color: var(--gray2);
+  line-height: 1.8;
+  max-width: 54ch;
+}
+
+.section-head { margin-bottom: 3.5rem; }
+
+/* ══════════════════════════════════════
+   À PROPOS
+══════════════════════════════════════ */
+.about { background: var(--dark); border-top: 1px solid var(--border); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+/* Photo placeholder — remplacez par <img src="votre-photo.jpg"> */
+.about-photo {
+  position: relative;
+}
+.photo-frame {
+  width: 100%;
+  aspect-ratio: 4/5;
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--gray);
+  font-size: 0.78rem;
+  overflow: hidden;
+  position: relative;
+}
+/* Pour utiliser une vraie photo :
+   remplacez .photo-frame par <img src="photo.jpg" style="width:100%;border-radius:14px;"> */
+.photo-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--blue-bg) 0%, transparent 60%);
+}
+.photo-icon {
+  font-size: 3.5rem;
+  position: relative;
+  z-index: 1;
+}
+.photo-hint {
+  font-family: var(--f-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--gray);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.about-badge {
+  position: absolute;
+  bottom: -14px; right: -14px;
+  background: var(--blue);
+  border: 3px solid var(--dark);
+  border-radius: 10px;
+  padding: 0.6rem 0.9rem;
+  font-family: var(--f-display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: white;
+  line-height: 1.3;
+  z-index: 2;
+}
+
+.about-content {}
+.about-content p {
+  font-size: 0.94rem;
+  color: var(--gray2);
+  line-height: 1.9;
+  margin-bottom: 1.1rem;
+}
+.about-content p:last-of-type { margin-bottom: 2rem; }
+.about-content strong { color: var(--white); font-weight: 500; }
+
+.about-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+.skill-tag {
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  color: var(--gray2);
+  background: var(--dark3);
+  border: 1px solid var(--border2);
+  padding: 0.3rem 0.8rem;
+  border-radius: 5px;
+}
+
+/* ══════════════════════════════════════
+   PORTFOLIO
+   ── Comment ajouter un site ──────────
+   Dupliquez un bloc <div class="work-card"> complet.
+   Modifiez :
+     - style="--preview-c: #VOTRE_COULEUR" (couleur du fond preview)
+     - data-bg="url('screenshot.jpg')" si vous avez une capture réelle
+     - .work-name, .work-type, .work-desc
+     - href sur le bouton
+   La grille s'adapte automatiquement.
+══════════════════════════════════════ */
+.portfolio { background: var(--night); border-top: 1px solid var(--border); }
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+
+.work-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+.work-card:hover {
+  border-color: var(--blue-dim);
+  box-shadow: 0 0 32px rgba(59,123,248,0.1);
+  transform: translateY(-4px);
+}
+
+/* Zone preview — remplaçable par une vraie capture d'écran */
+.work-preview {
+  aspect-ratio: 16/10;
+  background: var(--preview-c, var(--dark3));
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* Si vous avez une capture : ajoutez data-bg="url('img.jpg')" sur .work-card
+   et le JS ci-dessous l'appliquera automatiquement */
+.work-preview-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* mini window chrome decoration */
+.mini-browser {
+  width: 80%; max-width: 240px;
+  background: rgba(0,0,0,0.35);
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(4px);
+  overflow: hidden;
+}
+.mini-bar {
+  height: 22px;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  gap: 5px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.mini-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+}
+.mini-content {
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.mini-line {
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.15);
+}
+.mini-line.short { width: 60%; }
+.mini-line.accent { background: rgba(255,255,255,0.35); width: 40%; }
+
+/* hover overlay — bouton "Voir le site" */
+.work-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(7,9,15,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.work-card:hover .work-overlay { opacity: 1; }
+
+.overlay-btn {
+  font-family: var(--f-display);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: white;
+  background: var(--blue);
+  padding: 0.65rem 1.4rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: background 0.2s;
+}
+.overlay-btn:hover { background: var(--blue-l); }
+.overlay-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+
+.work-info {
+  padding: 1.3rem 1.4rem 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.work-type {
+  font-family: var(--f-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue-l);
+  margin-bottom: 0.4rem;
+}
+.work-name {
+  font-family: var(--f-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.01em;
+}
+.work-desc {
+  font-size: 0.78rem;
+  color: var(--gray2);
+  line-height: 1.6;
+  flex: 1;
+  margin-bottom: 1rem;
+}
+.work-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+.work-tag {
+  font-family: var(--f-mono);
+  font-size: 0.6rem;
+  color: var(--gray);
+  background: var(--dark3);
+  border: 1px solid var(--border);
+  padding: 0.15rem 0.55rem;
+  border-radius: 4px;
+}
+
+/* ══════════════════════════════════════
+   OFFRES
+   ── Comment modifier ─────────────────
+   Chaque offre = un <div class="offer-card">.
+   Modifiez : .offer-name, .offer-price,
+   .offer-sub, et la liste <ul>.
+   Pour mettre une offre en avant : ajoutez
+   la classe "featured" sur .offer-card.
+   Pour ajouter une offre : dupliquez un bloc.
+══════════════════════════════════════ */
+.offres {
+  background: var(--dark);
+  border-top: 1px solid var(--border);
+}
+
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  align-items: start;
+}
+
+.offer-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 2.2rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+.offer-card:hover { border-color: var(--blue-dim); }
+
+/* Offre mise en avant */
+.offer-card.featured {
+  border-color: var(--blue-dim);
+  background: var(--card2);
+  box-shadow: 0 0 0 1px var(--blue-dim), 0 8px 40px rgba(59,123,248,0.12);
+}
+
+.featured-badge {
+  display: none;
+  position: absolute;
+  top: -12px; left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--f-mono);
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: white;
+  background: var(--blue);
+  padding: 0.3rem 1rem;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.offer-card.featured .featured-badge { display: block; }
+
+.offer-name {
+  font-family: var(--f-display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blue-l);
+  margin-bottom: 1rem;
+}
+
+.offer-price {
+  font-family: var(--f-display);
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.offer-price sup {
+  font-size: 1.2rem;
+  vertical-align: super;
+  color: var(--gray2);
+  font-weight: 400;
+}
+
+.offer-sub {
+  font-size: 0.78rem;
+  color: var(--gray2);
+  margin-bottom: 1.8rem;
+  line-height: 1.5;
+}
+
+.offer-divider {
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 1.8rem;
+}
+
+.offer-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+}
+.offer-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  font-size: 0.84rem;
+  color: var(--gray2);
+  line-height: 1.5;
+}
+.offer-features li.included { color: var(--white); }
+
+.check {
+  width: 18px; height: 18px;
+  border-radius: 4px;
+  background: rgba(59,123,248,0.12);
+  border: 1px solid var(--blue-dim);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.check svg { width: 10px; height: 10px; stroke: var(--blue-l); stroke-width: 2.5; fill: none; }
+
+.cross {
+  width: 18px; height: 18px;
+  border-radius: 4px;
+  background: var(--dark3);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-size: 0.65rem;
+  color: var(--gray);
+}
+
+.offer-btn {
+  width: 100%;
+  font-family: var(--f-display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.22s;
+  display: block;
+  text-align: center;
+}
+.offer-btn-ghost {
+  background: transparent;
+  color: var(--gray2);
+  border: 1px solid var(--border2);
+}
+.offer-btn-ghost:hover { border-color: var(--gray); color: var(--white); }
+.offer-btn-blue {
+  background: var(--blue);
+  color: white;
+}
+.offer-btn-blue:hover { background: var(--blue-l); box-shadow: 0 0 20px var(--blue-glow); }
+
+/* ══════════════════════════════════════
+   CONTACT
+══════════════════════════════════════ */
+.contact {
+  background: var(--night);
+  border-top: 1px solid var(--border);
+}
+
+.contact-wrap {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.contact-aside {}
+.contact-aside p { font-size: 0.92rem; color: var(--gray2); line-height: 1.85; margin-bottom: 2.5rem; }
+
+.contact-links { display: flex; flex-direction: column; gap: 0.8rem; }
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.86rem;
+  color: var(--gray2);
+  transition: border-color 0.2s, color 0.2s;
+}
+.contact-link:hover { border-color: var(--blue-dim); color: var(--white); }
+.contact-link-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: var(--blue-bg);
+  border: 1px solid var(--blue-dim);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.contact-link strong { color: var(--white); font-weight: 500; display: block; }
+
+.contact-form {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 2.5rem;
+}
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.form-row.full { grid-template-columns: 1fr; }
+
+.field { display: flex; flex-direction: column; gap: 0.35rem; }
+.field label {
+  font-family: var(--f-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+.field input, .field select, .field textarea {
+  background: var(--dark2);
+  border: 1px solid var(--border2);
+  color: var(--white);
+  font-family: var(--f-body);
+  font-size: 0.9rem;
+  font-weight: 300;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.field input::placeholder, .field textarea::placeholder { color: var(--gray); }
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--blue-dim);
+  box-shadow: 0 0 0 3px rgba(59,123,248,0.1);
+}
+.field select option { background: var(--dark2); }
+.field textarea { resize: vertical; min-height: 120px; }
+
+.form-submit {
+  width: 100%;
+  margin-top: 0.5rem;
+  background: var(--blue);
+  color: white;
+  font-family: var(--f-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.form-submit:hover { background: var(--blue-l); box-shadow: 0 0 24px var(--blue-glow); }
+
+#contact-ok {
+  display: none;
+  text-align: center;
+  margin-top: 1rem;
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--blue-l);
+}
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer {
+  background: var(--night);
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-logo {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.footer-links { display: flex; gap: 1.8rem; }
+.footer-links a {
+  font-family: var(--f-body);
+  font-size: 0.75rem;
+  color: var(--gray);
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--white); }
+.footer-copy { font-size: 0.7rem; color: var(--gray); }
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-stats { display: none; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-photo { max-width: 280px; }
+  .work-grid { grid-template-columns: 1fr 1fr; }
+  .offers-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .offer-card.featured { margin: 0; }
+  .contact-wrap { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  nav { padding: 0 1.5rem; }
+  .nav-links { display: none; }
+  .section { padding: 5rem 1.5rem; }
+  .hero { padding: 7rem 1.5rem 5rem; }
+  h1 { font-size: 2.4rem; }
+  .work-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  footer { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+    <!-- ══ NAV ══ -->
+    <nav id="nav">
+        <div class="nav-logo">
+            <div class="nav-logo-dot"></div>
+            Emmanuel <span style="color:var(--gray);font-weight:400;">· Webdesign</span>
+        </div>
+        <div class="nav-links">
+            <a href="#about" class="nav-link">À propos</a>
+            <a href="#portfolio" class="nav-link">Réalisations</a>
+            <a href="#offres" class="nav-link">Offres</a>
+            <a href="#contact" class="nav-cta">Me contacter</a>
+        </div>
+    </nav>
+
+    <!-- ══ HERO ══ -->
+    <section class="hero">
+        <div class="hero-grid-bg"></div>
+        <div class="hero-orb"></div>
+        <div class="hero-inner">
+            <div class="hero-left">
+                <div class="hero-badge">Disponible pour nouveaux projets</div>
+                <h1>
+                    Votre site web,<br>
+                    <span class="blue">pensé pour vos</span><br>
+                    <span class="outline">clients.</span>
+                </h1>
+                <p class="hero-desc">
+                    J'aide les indépendants et les petites entreprises à obtenir
+                    davantage de clients grâce à un site internet moderne et sur mesure,
+                    offrant la présence en ligne qui leur ressemble.
+                </p>
+                <div class="hero-btns">
+                    <a href="#portfolio" class="btn btn-blue">Voir mes réalisations</a>
+                    <a href="#contact" class="btn btn-ghost">Demander un devis</a>
+                </div>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stats-card">
+                    <div class="stat-item">
+                        <div class="stat-num">6+</div>
+                        <div class="stat-label">Design disponibles</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num">100%</div>
+                        <div class="stat-label">Personnalisé</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num">5j</div>
+                        <div class="stat-label">Délai moyen livraison</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num">Adapté</div>
+                        <div class="stat-label">Toutes plateformes</div>
+                    </div>
+                    <div class="tech-bar" style="grid-column:1/-1;">
+                        <div class="tech-label">Compétences</div>
+                        <div class="tech-chips">
+                            <span class="tech-chip">HTML</span>
+                            <span class="tech-chip">CSS</span>
+                            <span class="tech-chip">JavaScript</span>
+                            <span class="tech-chip">Responsive</span>
+                            <span class="tech-chip">SEO</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ À PROPOS ══ -->
+    <section class="section about" id="about">
+        <div class="section-inner">
+            <div class="about-grid">
+                <div class="about-photo">
+                    <!-- Remplacez ce bloc par : <img src="votre-photo.jpg" style="width:100%;border-radius:14px;"> -->
+                    <img src="Images/presentation_pic.jpg" style="width:100%;border-radius:14px;">
+                    <div class="about-badge">
+                        Emmanuel<br>
+                        <span style="font-weight:300;font-size:0.62rem;opacity:0.7;">Webdesigner freelance</span>
+                    </div>
+                </div>
+
+                <div class="about-content">
+                    <div class="mono-tag">Qui suis-je</div>
+                    <h2>Passionné de web,<br>exigeant <span class="blue">sur le détail.</span></h2>
+
+                    <p style="margin-top:1.2rem;">
+                        Je suis <strong>Emmanuel</strong>, webdesigner freelance basé dans le sud de la France.
+                        Je conçois des <strong>sites web sur mesure</strong> pour les artisans, commerçants,
+                        restaurants, coiffeurs et indépendants qui veulent une présence en ligne
+                        soignée — sans se ruiner et sans attendre trois mois.
+                    </p>
+                    <p>
+                        Chaque projet commence par une <strong>conversation</strong> : comprendre votre métier,
+                        votre clientèle, ce qui vous différencie. Le site arrive ensuite, construit pour
+                        vous ressembler et <strong>vous faire gagner des clients</strong>.
+                    </p>
+                    <p>
+                        Je livre des pages HTML/CSS/JS <strong>légères, rapides et sans abonnement CMS</strong> —
+                        vous êtes propriétaire de votre code, pour toujours.
+                    </p>
+
+                    <div class="about-skills">
+                        <span class="skill-tag">Design UI/UX</span>
+                        <span class="skill-tag">Sites vitrines</span>
+                        <span class="skill-tag">Restaurants & commerces</span>
+                        <span class="skill-tag">Pages de vente</span>
+                        <span class="skill-tag">Formulaires de contact</span>
+                        <span class="skill-tag">Responsive mobile</span>
+                        <span class="skill-tag">Sans abonnement mensuel</span>
+                    </div>
+                    <div style="margin-top:2rem;">
+                        <a href="#contact" class="btn btn-blue">Démarrer un projet</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ PORTFOLIO ══
+         ─────────────────────────────────────────────────
+         Pour ajouter un site : dupliquez un .work-card.
+         Modifiez :
+           • style="--preview-c: #COULEUR" → couleur du fond aperçu
+           • .work-type → catégorie (Coiffeur, Restaurant…)
+           • .work-name → nom du site
+           • .work-desc → courte description
+           • .work-tag → technologies / caractéristiques
+           • href sur .overlay-btn → chemin vers votre fichier HTML
+         Pour utiliser une vraie capture : ajoutez
+           data-bg="url('captures/monsite.jpg')"
+           sur .work-card (le JS l'applique automatiquement).
+         ───────────────────────────────────────────────── -->
+    <section class="section portfolio" id="portfolio">
+        <div class="section-inner">
+            <div class="section-head">
+                <div class="mono-tag">Réalisations</div>
+                <h2>Quelques sites <span class="blue">d'exemple</span></h2>
+                <p class="section-sub">Chaque site est construit et pensé pour une enseigne.<br /> Cliquez pour l'explorer.</p>
+            </div>
+
+            <div class="work-grid">
+
+                <!-- ─ SITE 1 ─ -->
+                <div class="work-card" style="--preview-c: #0C0C0C;" data-bg="url('Images/coiffeur_classique.png')">
+                    <div class="work-preview">
+                        <div class="work-preview-inner">
+                            <div class="mini-browser">
+                                <div class="mini-bar">
+                                    <div class="mini-dot" style="background:#FF3366;"></div>
+                                    <div class="mini-dot" style="background:#9B5CF6;"></div>
+                                    <div class="mini-dot" style="background:#333;"></div>
+                                </div>
+                                <div class="mini-content">
+                                    <div class="mini-line accent" style="background:linear-gradient(90deg,#FF3366,#9B5CF6);opacity:0.7;"></div>
+                                    <div class="mini-line"></div>
+                                    <div class="mini-line short"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="work-overlay">
+                            <a href="Pages/coiffeur_classique.html" target="_blank" class="overlay-btn">
+                                Voir le site
+                                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" /></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <div class="work-type">Coiffeur · Classique</div>
+                        <div class="work-name">Maison Rive</div>
+                        <div class="work-desc">Site classique beige et noir. Avis, localisation, services.</div>
+                        <div class="work-tags">
+                            <span class="work-tag">Light</span>
+                            <span class="work-tag">Elégant</span>
+                            <span class="work-tag">Carte OSM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─ SITE 2 ─ -->
+                <div class="work-card" style="--preview-c: #0C0C0C;" data-bg="url('Images/coiffeur_artistique.png')">
+                    <div class="work-preview">
+                        <div class="work-preview-inner">
+                            <div class="mini-browser">
+                                <div class="mini-bar">
+                                    <div class="mini-dot" style="background:#FF3366;"></div>
+                                    <div class="mini-dot" style="background:#9B5CF6;"></div>
+                                    <div class="mini-dot" style="background:#333;"></div>
+                                </div>
+                                <div class="mini-content">
+                                    <div class="mini-line accent" style="background:linear-gradient(90deg,#FF3366,#9B5CF6);opacity:0.7;"></div>
+                                    <div class="mini-line"></div>
+                                    <div class="mini-line short"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="work-overlay">
+                            <a href="Pages/coiffeur_artistique.html" target="_blank" class="overlay-btn">
+                                Voir le site
+                                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" /></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <div class="work-type">Coiffeur · Artistique</div>
+                        <div class="work-name">Maison Karev</div>
+                        <div class="work-desc">Site chic noir et jaune. Formulaire RDV, localisation, services.</div>
+                        <div class="work-tags">
+                            <span class="work-tag">Dark</span>
+                            <span class="work-tag">Chic</span>
+                            <span class="work-tag">Carte OSM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─ SITE 3 ─ -->
+                <div class="work-card" style="--preview-c: #F3EDE1;" data-bg="url('Images/coiffeur_moderne.png')">
+                    <div class="work-preview">
+                        <div class="work-preview-inner">
+                            <div class="mini-browser" style="border-color:rgba(0,0,0,0.1);">
+                                <div class="mini-bar" style="background:rgba(0,0,0,0.08);">
+                                    <div class="mini-dot" style="background:#6B2737;"></div>
+                                    <div class="mini-dot" style="background:#B8943F;"></div>
+                                    <div class="mini-dot" style="background:#ccc;"></div>
+                                </div>
+                                <div class="mini-content">
+                                    <div class="mini-line accent" style="background:rgba(107,39,55,0.5);"></div>
+                                    <div class="mini-line" style="background:rgba(0,0,0,0.1);"></div>
+                                    <div class="mini-line short" style="background:rgba(0,0,0,0.07);"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="work-overlay">
+                            <a href="Pages/coiffeur_moderne.html" target="_blank" class="overlay-btn">
+                                Voir le site
+                                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" /></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <div class="work-type">Coiffeur · Moderne</div>
+                        <div class="work-name">Volt Studio</div>
+                        <div class="work-desc">Site moderne sombre et coloré. Formulaire RDV, localisation, services.</div>
+                        <div class="work-tags">
+                            <span class="work-tag">Dark</span>
+                            <span class="work-tag">Coloré</span>
+                            <span class="work-tag">Carte OSM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─ SITE 4 ─ -->
+                <div class="work-card" style="--preview-c: #F8F4EF;" data-bg="url('Images/restaurant.png')">
+                    <div class="work-preview">
+                        <div class="work-preview-inner">
+                            <div class="mini-browser" style="border-color:rgba(0,0,0,0.08);">
+                                <div class="mini-bar" style="background:rgba(0,0,0,0.06);">
+                                    <div class="mini-dot" style="background:#C05A35;"></div>
+                                    <div class="mini-dot" style="background:#6B8F71;"></div>
+                                    <div class="mini-dot" style="background:#ccc;"></div>
+                                </div>
+                                <div class="mini-content">
+                                    <div class="mini-line accent" style="background:rgba(192,90,53,0.5);"></div>
+                                    <div class="mini-line" style="background:rgba(0,0,0,0.08);"></div>
+                                    <div class="mini-line short" style="background:rgba(0,0,0,0.06);"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="work-overlay">
+                            <a href="Pages/restaurant.html" target="_blank" class="overlay-btn">
+                                Voir le site
+                                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" /></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <div class="work-type">Restaurant · Classique</div>
+                        <div class="work-name">Le Mercier</div>
+                        <div class="work-desc">Gastronomie française. Fond ivoire, menu imprimé avec lignes de points, 3 onglets, carte des vins.</div>
+                        <div class="work-tags">
+                            <span class="work-tag">Light</span>
+                            <span class="work-tag">Élégant</span>
+                            <span class="work-tag">Menu Complet</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─ SITE 5 ─ -->
+                <div class="work-card" style="--preview-c: #131A15;" data-bg="url('Images/bistrot.png')">
+                    <div class="work-preview">
+                        <div class="work-preview-inner">
+                            <div class="mini-browser">
+                                <div class="mini-bar">
+                                    <div class="mini-dot" style="background:#C8923A;"></div>
+                                    <div class="mini-dot" style="background:#6B8F71;"></div>
+                                    <div class="mini-dot" style="background:#333;"></div>
+                                </div>
+                                <div class="mini-content">
+                                    <div class="mini-line accent" style="background:rgba(200,146,58,0.6);"></div>
+                                    <div class="mini-line"></div>
+                                    <div class="mini-line short"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="work-overlay">
+                            <a href="Pages/bistrot.html" target="_blank" class="overlay-btn">
+                                Voir le site
+                                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" /></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <div class="work-type">Restaurant · Bistrot</div>
+                        <div class="work-name">Chez Paulette</div>
+                        <div class="work-desc">Bistrot traditionnel lyonnais. Hero asymétrique, terracotta + vert sauge, cartes de plats modernes.</div>
+                        <div class="work-tags">
+                            <span class="work-tag">Light</span>
+                            <span class="work-tag">Chaleureux</span>
+                            <span class="work-tag">Coloré</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─ SITE 6 ─ -->
+                <div class="work-card" style="--preview-c: #0E161F;" data-bg="url('Images/cave.png')">
+                    <div class="work-preview">
+                        <div class="work-preview-inner">
+                            <div class="mini-browser">
+                                <div class="mini-bar">
+                                    <div class="mini-dot" style="background:#C8763A;"></div>
+                                    <div class="mini-dot" style="background:#5FAFD1;"></div>
+                                    <div class="mini-dot" style="background:#333;"></div>
+                                </div>
+                                <div class="mini-content">
+                                    <div class="mini-line accent" style="background:rgba(200,118,58,0.5);"></div>
+                                    <div class="mini-line"></div>
+                                    <div class="mini-line short"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="work-overlay">
+                            <a href="Pages/cave.html" target="_blank" class="overlay-btn">
+                                Voir le site
+                                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" /></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <div class="work-type">Restaurant · Cave</div>
+                        <div class="work-name">La Cave Saint-Honoré</div>
+                        <div class="work-desc">Vert forêt + ambre, mi-moderne mi-traditionnel. Bandes alternées sombre/clair, menu cave complète.</div>
+                        <div class="work-tags">
+                            <span class="work-tag">Dark</span>
+                            <span class="work-tag">Traditionnel</span>
+                            <span class="work-tag">Carte des vins</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─ AJOUTER UN SITE — décommentez et remplissez ce bloc
+            <div class="work-card" style="- -preview-c: #COULEUR_HEX;">
+              <div class="work-preview">
+                <div class="work-preview-inner">
+                  <div class="mini-browser">
+                    <div class="mini-bar">
+                      <div class="mini-dot" style="background:#AAA;"></div>
+                      <div class="mini-dot" style="background:#888;"></div>
+                      <div class="mini-dot" style="background:#555;"></div>
+                    </div>
+                    <div class="mini-content">
+                      <div class="mini-line accent"></div>
+                      <div class="mini-line"></div>
+                      <div class="mini-line short"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="work-overlay">
+                  <a href="VOTRE_FICHIER.html" target="_blank" class="overlay-btn">
+                    Voir le site
+                    <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+                  </a>
+                </div>
+              </div>
+              <div class="work-info">
+                <div class="work-type">CATÉGORIE</div>
+                <div class="work-name">Nom du site</div>
+                <div class="work-desc">Description courte du projet.</div>
+                <div class="work-tags">
+                  <span class="work-tag">Tag 1</span>
+                  <span class="work-tag">Tag 2</span>
+                </div>
+              </div>
+            </div>
+            ─ FIN BLOC SITE ─ -->
+
+
+            </div>
+        </div>
+        <p style="text-align:center;margin-top:2rem;font-size:0.78rem;color:var(--gray);font-family:var(--f-mono);">
+            // Les sites présents sur cette pages figurent en tant qu'exemples. Tout site exemple, ou non, vendu ne figure plus en proposition à d'autres acheteurs
+        </p>
+    </section>
+    
+
+    <!-- ══ OFFRES ══
+         ─────────────────────────────────────────────────
+         Pour modifier une offre : changez simplement
+         le texte dans chaque bloc .offer-card.
+         Pour mettre une offre en avant : la classe
+         "featured" est déjà sur l'offre du milieu.
+         Déplacez-la sur n'importe quel autre bloc.
+         Pour ajouter une offre : dupliquez un bloc
+         et ajustez le nombre de colonnes dans .offers-grid.
+         ───────────────────────────────────────────────── -->
+    <section class="section offres" id="offres">
+        <div class="section-inner">
+            <div class="section-head">
+                <div class="mono-tag">Tarifs</div>
+                <h2>Des offres <span class="blue">claires</span></h2>
+                <p class="section-sub">Pas de surprise, pas d'abonnement caché. Vous payez une fois, le site est à vous.</p>
+            </div>
+
+            <div class="offers-grid">
+
+                <!-- OFFRE 1 — ESSENTIEL -->
+                <div class="offer-card">
+                    <div class="offer-name">Essentiel</div>
+                    <div class="offer-price"><sup>A partir de </sup> 150 €</div>
+                    <div class="offer-sub">Site vitrine 1 page — idéal pour démarrer ou tester votre présence en ligne.</div>
+                    <div class="offer-divider"></div>
+                    <ul class="offer-features">
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>1 page responsive</li>
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Présentation, services, contact</li>
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Formulaire de contact</li>
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Adapté mobile & tablette</li>
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>3 révisions incluses</li>
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Livraison en 5–7 jours*</li>
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Code source fourni</li>
+                        <li><span class="cross">✕</span>Localisation / carte</li>
+                        <li><span class="cross">✕</span>Menu / catalogue</li>
+                        <li><span class="cross">✕</span>Animations avancées</li>
+                    </ul>
+                    <a href="#contact" class="offer-btn offer-btn-ghost">Commencer</a>
+                </div>
+
+                <!-- OFFRE 2 — PRO (mise en avant) -->
+                <div class="offer-card featured">
+                    <div class="featured-badge">Le plus populaire</div>
+                    <div class="offer-name">Professionnel</div>
+                    <div class="offer-price"><sup>A partir de </sup> 290 €</div>
+                    <div class="offer-sub">Site complet multi-sections — pour les commerces, restaurants, coiffeurs et indépendants.</div>
+                    <div class="offer-divider"></div>
+                    <ul class="offer-features">
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>3 à 6 sections sur mesure</li>
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Présentation, services, galerie</li>
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Formulaire de contact / RDV</li>
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Localisation & carte intégrée</li>
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Horaires, tarifs, menu</li>
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Adapté mobile & tablette</li>
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>3 révisions incluses</li>
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Livraison en 7–10 jours*</li>
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Code source fourni</li>
+                    </ul>
+                    <a href="#contact" class="offer-btn offer-btn-blue">Commencer</a>
+                </div>
+
+                <!-- OFFRE 3 — SUR MESURE -->
+                <div class="offer-card">
+                    <div class="offer-name">Sur mesure</div>
+                    <div class="offer-price" style="font-size:2rem;padding-top:0.3rem;">Devis<br>gratuit</div>
+                    <div class="offer-sub">Projet complexe, multipage, fonctionnalités spécifiques — on en parle ensemble.</div>
+                    <div class="offer-divider"></div>
+                    <ul class="offer-features">
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Nombre de pages illimité</li>
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Design 100% original</li>
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Animations & interactions</li>
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Catalogue, galerie, filtres</li>
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Fonctionnalités sur demande</li>
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Accompagnement complet</li>
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Révisions dans la limite du délai</li>
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Délai selon projet</li>
+                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Maintenance en option</li>
+                    </ul>
+                    <a href="#contact" class="offer-btn offer-btn-ghost">Demander un devis</a>
+                </div>
+
+            </div>
+            <p style="text-align:center;margin-top:2rem;font-size:0.78rem;color:var(--gray);font-family:var(--f-mono);">
+                * Sous réserve de réception des contenus et validation du client
+            </p>
+            <p style="text-align:center;margin-top:2rem;font-size:0.78rem;color:var(--gray);font-family:var(--f-mono);">
+                // Tous les sites sont livrés en code HTML/CSS/JS — aucun abonnement CMS, vous êtes propriétaire du code et de l'hébergement.
+            </p>
+        </div>
+    </section>
+
+    <!-- ══ CONTACT ══ -->
+    <section class="section contact" id="contact">
+        <div class="section-inner">
+            <div class="contact-wrap">
+                <div class="contact-aside">
+                    <div class="mono-tag">Contact</div>
+                    <h2>Parlons de <span class="blue">votre projet.</span></h2>
+                    <p style="margin-top:1rem;">
+                        Une question, un projet, une idée ? Décrivez-moi votre besoin,
+                        je vous réponds sous 24h avec un premier avis et une estimation gratuite.
+                    </p>
+
+                    <div class="contact-links">
+                        <a href="mailto:emmanuel.rami1510@gmail.com" class="contact-link">
+                            <div class="contact-link-icon">✉️</div>
+                            <div>
+                                <strong>emmanuel.rami1510@gmail.fr</strong>
+                                Réponse sous 24h
+                            </div>
+                        </a>
+                        <a href="tel:+33626343546" class="contact-link">
+                            <div class="contact-link-icon">📞</div>
+                            <div>
+                                <strong>06 26 34 35 46</strong>
+                                Lun–Ven, 9h–18h
+                            </div>
+                        </a>
+                        <a href="#" class="contact-link">
+                            <div class="contact-link-icon">💼</div>
+                            <div>
+                                <strong>LinkedIn</strong>
+                                Voir mon profil
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contact-form">
+                    <div class="form-row">
+                        <div class="field">
+                            <label for="c-nom">Nom</label>
+                            <input type="text" id="c-nom" placeholder="Marie Dupont" required>
+                        </div>
+                        <div class="field">
+                            <label for="c-email">Email</label>
+                            <input type="email" id="c-email" placeholder="marie@mail.com" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="field">
+                            <label for="c-tel">Téléphone</label>
+                            <input type="tel" id="c-tel" placeholder="06 00 00 00 00">
+                        </div>
+                        <div class="field">
+                            <label for="c-offre">Offre souhaitée</label>
+                            <select id="c-offre">
+                                <option value="" disabled selected>Choisissez</option>
+                                <option>Essentiel — 390 €</option>
+                                <option>Professionnel — 690 €</option>
+                                <option>Sur mesure — Devis gratuit</option>
+                                <option>Je ne sais pas encore</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="field">
+                            <label for="c-secteur">Votre secteur</label>
+                            <select id="c-secteur">
+                                <option value="" disabled selected>Votre activité</option>
+                                <option>Restaurant / Café / Bar</option>
+                                <option>Coiffeur / Salon beauté</option>
+                                <option>Commerce de proximité</option>
+                                <option>Artisan / BTP</option>
+                                <option>Professionnel de santé</option>
+                                <option>Coach / Formateur</option>
+                                <option>Autre</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="c-budget">Budget envisagé</label>
+                            <select id="c-budget">
+                                <option value="" disabled selected>Budget approximatif</option>
+                                <option>Moins de 400 €</option>
+                                <option>400 – 700 €</option>
+                                <option>700 – 1 500 €</option>
+                                <option>Plus de 1 500 €</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row full">
+                        <div class="field">
+                            <label for="c-msg">Décrivez votre projet</label>
+                            <textarea id="c-msg" placeholder="Quel site souhaitez-vous ? Avez-vous un style en tête ? Un contenu à intégrer ? Plus vous donnez de détails, mieux je pourrai vous aider." required></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="form-submit">
+                        Envoyer ma demande
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></svg>
+                    </button>
+                    <div id="contact-ok">// Message reçu — je vous réponds sous 24h.</div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ FOOTER ══ -->
+    <footer>
+        <div class="footer-logo">
+            <div class="nav-logo-dot" style="animation:none;box-shadow:0 0 6px var(--blue);"></div>
+            Emmanuel <span style="color:var(--gray);font-weight:400;font-size:0.85rem;"> · Webdesign freelance</span>
+        </div>
+        <div class="footer-links">
+            <a href="#about">À propos</a>
+            <a href="#portfolio">Réalisations</a>
+            <a href="#offres">Offres</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-copy">© 2025 Emmanuel · Création de sites web</div>
+    </footer>
+
+    <script>// Nav solid on scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('solid', window.scrollY > 50);
+}, { passive: true });
+
+// Portfolio : applique data-bg comme background-image si défini
+document.querySelectorAll('.work-card[data-bg]').forEach(card => {
+  const bg = card.getAttribute('data-bg');
+  const preview = card.querySelector('.work-preview');
+  if (preview && bg) {
+    preview.style.backgroundImage = bg;
+    preview.style.backgroundSize = '100% auto';
+    preview.style.backgroundPosition = 'top center';
+    preview.querySelector('.work-preview-inner').style.display = 'none';
+  }
+});
+
+// Contact form
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  this.querySelectorAll('input,select,textarea,button').forEach(el => el.disabled = true);
+  document.getElementById('contact-ok').style.display = 'block';
+});</script>
+
+</body>
+</html>

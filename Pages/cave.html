@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Cave Saint-Honoré — Restaurant</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════
+   TOKENS
+═══════════════════════════════════ */
+:root {
+  --night:    #131A15;
+  --forest:   #1A241C;
+  --forest2:  #202C22;
+  --panel:    #263029;
+  --card:     #2C3830;
+
+  --parch:    #F3EDE1;
+  --parch2:   #EAE2D3;
+  --parch3:   #DDD4C2;
+
+  --amber:    #C8923A;
+  --amber-l:  #E0B464;
+  --amber-d:  #7A561C;
+  --amber-bg: rgba(200,146,58,0.08);
+
+  --rust:     #A84830;
+
+  --won:      #D8CFC0;   /* warm off-white on dark */
+  --won2:     #96897A;   /* muted on dark */
+  --won3:     #4A4640;   /* faint on dark */
+
+  --wol:      #1A2418;   /* ink on light */
+  --wol2:     #56504A;   /* muted on light */
+  --wol3:     #A09890;   /* faint on light */
+
+  --border-d: #2E3A30;
+  --border-l: #D8D0C4;
+
+  --f-display: 'Libre Baskerville', Georgia, serif;
+  --f-body:    'Outfit', sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--night);
+  color: var(--won);
+  font-family: var(--f-body);
+  font-weight: 300;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+::selection { background: var(--amber); color: var(--night); }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--night); }
+::-webkit-scrollbar-thumb { background: var(--amber-d); }
+
+/* ═══════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════ */
+nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 300;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3.5rem;
+  transition: background 0.4s, border-color 0.4s;
+  border-bottom: 1px solid transparent;
+}
+
+nav.solid {
+  background: rgba(19, 26, 21, 0.96);
+  border-color: var(--border-d);
+  backdrop-filter: blur(14px);
+}
+
+.nav-logo {
+  font-family: var(--f-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--won);
+}
+.nav-logo span {
+  color: var(--amber);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.nav-link {
+  font-family: var(--f-body);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--won2);
+  padding: 0.45rem 0.9rem;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+}
+.nav-link:hover { color: var(--won); background: rgba(255,255,255,0.04); }
+
+.nav-cta {
+  margin-left: 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--amber);
+  border: 1px solid var(--amber-d);
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.nav-cta:hover { background: var(--amber-bg); border-color: var(--amber); }
+
+/* ═══════════════════════════════════
+   HERO — dark, theatrical, centered
+═══════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  background: var(--night);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8rem 2rem 6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle radial glow from center — like a candle on the table */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 35%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px; height: 500px;
+  background: radial-gradient(ellipse, rgba(200,146,58,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* thin amber top bar — the "shelf edge" signature element */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--amber) 30%, var(--amber) 70%, transparent 100%);
+}
+
+.hero-eyebrow {
+  position: relative;
+  font-family: var(--f-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 3rem;
+  animation: rise 1s ease both;
+}
+
+.hero-rule {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 2.5rem;
+  animation: rise 1s ease both;
+}
+.hero-rule::before, .hero-rule::after {
+  content: '';
+  width: 40px; height: 1px;
+  background: var(--amber-d);
+}
+
+.hero-title {
+  position: relative;
+  font-family: var(--f-display);
+  font-size: clamp(3.2rem, 8vw, 8rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  color: var(--won);
+  animation: rise 1s ease 0.12s both;
+}
+.hero-title em {
+  display: block;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--amber-l);
+  font-size: 0.6em;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+.hero-amber-line {
+  width: 60px; height: 1px;
+  background: var(--amber);
+  margin: 2.5rem auto;
+  animation: rise 1s ease 0.22s both;
+  opacity: 0.6;
+}
+
+.hero-desc {
+  font-size: 1rem;
+  color: var(--won2);
+  max-width: 48ch;
+  margin: 0 auto;
+  line-height: 1.85;
+  animation: rise 1s ease 0.3s both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+  animation: rise 1s ease 0.4s both;
+}
+
+.btn {
+  font-family: var(--f-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  padding: 0.9rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  display: inline-block;
+  transition: all 0.22s;
+}
+.btn-amber {
+  background: var(--amber);
+  color: var(--night);
+}
+.btn-amber:hover { background: var(--amber-l); }
+.btn-outline-d {
+  background: transparent;
+  color: var(--won);
+  border: 1px solid var(--border-d);
+}
+.btn-outline-d:hover { border-color: var(--won2); }
+.btn-outline-l {
+  background: transparent;
+  color: var(--wol);
+  border: 1px solid var(--border-l);
+}
+.btn-outline-l:hover { border-color: var(--wol2); }
+
+.hero-chips {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-top: 5rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--border-d);
+  animation: rise 1s ease 0.52s both;
+}
+.chip-val {
+  font-family: var(--f-display);
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--amber);
+}
+.chip-label {
+  font-size: 0.7rem;
+  color: var(--won3);
+  letter-spacing: 0.05em;
+  margin-top: 0.2rem;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════
+   SHARED LAYOUT
+═══════════════════════════════════ */
+.inner { max-width: 1080px; margin: 0 auto; padding: 0 3rem; }
+
+.amber-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 1.2rem;
+}
+.amber-tag::before {
+  content: '';
+  width: 16px; height: 1px;
+  background: var(--amber-d);
+  flex-shrink: 0;
+}
+
+.light-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 1.2rem;
+}
+.light-tag::before {
+  content: '';
+  width: 16px; height: 1px;
+  background: var(--rust);
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+
+.h2-dark {
+  font-family: var(--f-display);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--won);
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+}
+.h2-dark em { font-style: italic; color: var(--amber-l); font-weight: 400; }
+
+.h2-light {
+  font-family: var(--f-display);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--wol);
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+}
+.h2-light em { font-style: italic; color: var(--rust); font-weight: 400; }
+
+.sub-dark { font-size: 0.94rem; color: var(--won2); line-height: 1.85; }
+.sub-light { font-size: 0.94rem; color: var(--wol2); line-height: 1.85; max-width: 52ch; }
+
+/* ═══════════════════════════════════
+   CONCEPT — PARCHMENT / LIGHT BAND
+═══════════════════════════════════ */
+.concept {
+  background: var(--parch);
+  padding: 7rem 0;
+  border-top: 3px solid var(--parch3);
+}
+
+.concept-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+.concept-right {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.pillar {
+  display: flex;
+  gap: 1.2rem;
+  padding: 1.4rem;
+  background: var(--parch2);
+  border-radius: 6px;
+  border-left: 3px solid var(--rust);
+  transition: border-color 0.2s;
+}
+.pillar:hover { border-left-color: var(--amber); }
+.pillar-num {
+  font-family: var(--f-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--parch3);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 2rem;
+  text-align: center;
+}
+.pillar-body h4 {
+  font-family: var(--f-display);
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: var(--wol);
+  margin-bottom: 0.3rem;
+}
+.pillar-body p { font-size: 0.82rem; color: var(--wol2); line-height: 1.7; }
+
+/* ═══════════════════════════════════
+   CARTE — DARK BAND
+   Style : sections avec titre ambre + ligne de tirets,
+   plats listés avec nombre, description et prix.
+   Mi-traditionnel mi-moderne : pas de cartes,
+   pas de points — une liste lisible et élégante.
+═══════════════════════════════════ */
+.carte {
+  background: var(--forest);
+  padding: 7rem 0;
+  border-top: 1px solid var(--border-d);
+}
+
+.carte-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+/* Onglets sombres */
+.tabs-dark {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--border-d);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.tab-d {
+  font-family: var(--f-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 0.6rem 1.2rem;
+  background: transparent;
+  color: var(--won2);
+  border: none;
+  border-right: 1px solid var(--border-d);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.tab-d:last-child { border-right: none; }
+.tab-d.active { background: var(--amber); color: var(--night); }
+.tab-d:hover:not(.active) { background: rgba(255,255,255,0.03); color: var(--won); }
+
+.menu-panel { display: none; }
+.menu-panel.active { display: block; }
+
+/* Deux colonnes de menu */
+.menu-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border-d);
+}
+
+.menu-col {
+  background: var(--forest);
+  padding: 2.5rem;
+}
+
+.menu-section {
+  margin-bottom: 2.5rem;
+}
+.menu-section:last-child { margin-bottom: 0; }
+
+.menu-section-head {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border-d);
+}
+.menu-section-title {
+  font-family: var(--f-display);
+  font-size: 0.88rem;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--amber-l);
+  letter-spacing: 0.04em;
+}
+.menu-section-tag {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--won3);
+}
+
+/* Ligne de plat */
+.dish-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  align-items: start;
+}
+.dish-row:last-child { border-bottom: none; }
+
+.dish-name {
+  font-family: var(--f-display);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--won);
+  line-height: 1.3;
+  margin-bottom: 0.2rem;
+}
+.dish-desc {
+  font-size: 0.75rem;
+  color: var(--won2);
+  line-height: 1.55;
+  font-style: italic;
+}
+.dish-v {
+  display: inline-block;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #7AAB80;
+  background: rgba(122,171,128,0.12);
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+.dish-price {
+  font-family: var(--f-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--amber);
+  text-align: right;
+  white-space: nowrap;
+  padding-top: 0.1rem;
+}
+
+.carte-formule {
+  margin-top: 2rem;
+  background: var(--panel);
+  border: 1px solid var(--border-d);
+  border-left: 3px solid var(--amber);
+  border-radius: 4px;
+  padding: 1.4rem 1.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.formule-text {}
+.formule-name {
+  font-family: var(--f-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--won);
+  margin-bottom: 0.2rem;
+}
+.formule-desc { font-size: 0.78rem; color: var(--won2); font-style: italic; }
+.formule-price {
+  font-family: var(--f-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--amber);
+  white-space: nowrap;
+}
+
+/* ═══════════════════════════════════
+   CITATION — DARK SOMBRE PANEL
+═══════════════════════════════════ */
+.citation {
+  background: var(--night);
+  padding: 7rem 2rem;
+  text-align: center;
+  border-top: 1px solid var(--border-d);
+  border-bottom: 1px solid var(--border-d);
+  position: relative;
+  overflow: hidden;
+}
+
+.citation::before {
+  content: '"';
+  position: absolute;
+  top: -1rem; left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--f-display);
+  font-size: 22rem;
+  font-weight: 700;
+  color: rgba(200,146,58,0.03);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.citation-text {
+  position: relative;
+  font-family: var(--f-display);
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--won);
+  line-height: 1.5;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+}
+.citation-text strong { color: var(--amber-l); font-weight: 700; font-style: normal; }
+
+.citation-attr {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--won3);
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+.citation-attr::before, .citation-attr::after {
+  content: '';
+  width: 30px; height: 1px;
+  background: var(--won3);
+  opacity: 0.4;
+}
+
+/* ═══════════════════════════════════
+   RÉSERVATION — PARCHMENT / LIGHT
+═══════════════════════════════════ */
+.reservation {
+  background: var(--parch);
+  padding: 7rem 0;
+}
+
+.resa-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+}
+
+.resa-aside h2 { margin-bottom: 1rem; }
+.resa-aside p { font-size: 0.9rem; color: var(--wol2); line-height: 1.85; margin-bottom: 2rem; }
+
+.contact-items { display: flex; flex-direction: column; gap: 0.8rem; }
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.88rem;
+  color: var(--wol2);
+  padding: 1rem 1.2rem;
+  background: var(--parch2);
+  border-radius: 6px;
+  border: 1px solid var(--border-l);
+  transition: border-color 0.2s;
+}
+.contact-item:hover { border-color: var(--rust); }
+.contact-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: var(--parch3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.contact-item strong { color: var(--wol); font-weight: 500; display: block; }
+
+.resa-form-wrap {
+  background: var(--parch2);
+  border: 1px solid var(--border-l);
+  border-radius: 8px;
+  padding: 2.5rem;
+}
+
+.frow { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 0.8rem; }
+.frow.full-w { grid-template-columns: 1fr; }
+
+.fld { display: flex; flex-direction: column; gap: 0.3rem; }
+.fld label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--wol2);
+}
+.fld input, .fld select, .fld textarea {
+  background: var(--parch);
+  border: 1px solid var(--border-l);
+  color: var(--wol);
+  font-family: var(--f-body);
+  font-size: 0.88rem;
+  font-weight: 300;
+  padding: 0.75rem 0.9rem;
+  border-radius: 5px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.fld input::placeholder, .fld textarea::placeholder { color: var(--wol3); }
+.fld input:focus, .fld select:focus, .fld textarea:focus {
+  border-color: var(--rust);
+  box-shadow: 0 0 0 3px rgba(168,72,48,0.08);
+}
+.fld select option { background: var(--parch); }
+.fld textarea { resize: vertical; min-height: 80px; }
+
+.resa-btn {
+  width: 100%;
+  margin-top: 0.5rem;
+  background: var(--forest);
+  color: var(--won);
+  font-family: var(--f-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  padding: 0.95rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.resa-btn:hover { background: var(--panel); }
+
+#resa-confirm {
+  display: none;
+  text-align: center;
+  margin-top: 1rem;
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 0.96rem;
+  color: var(--rust);
+}
+
+/* ═══════════════════════════════════
+   LOCALISATION — DARK
+═══════════════════════════════════ */
+.localisation {
+  background: var(--forest2);
+  border-top: 1px solid var(--border-d);
+}
+
+.loc-head {
+  padding: 5rem 3rem 3.5rem;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.loc-split {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  border-top: 1px solid var(--border-d);
+}
+
+.loc-info {
+  padding: 3.5rem;
+  border-right: 1px solid var(--border-d);
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.loc-block {}
+.loc-lbl {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+.loc-val {
+  font-size: 0.88rem;
+  color: var(--won2);
+  line-height: 1.9;
+}
+.loc-val a { color: var(--won3); text-decoration: underline; text-underline-offset: 3px; transition: color 0.2s; }
+.loc-val a:hover { color: var(--amber-l); }
+
+.hours-list { display: flex; flex-direction: column; }
+.hl {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 0.84rem;
+}
+.hl:last-child { border-bottom: none; }
+.hl .dj { color: var(--won3); }
+.hl .hh { color: var(--won2); }
+.hl.closed .dj, .hl.closed .hh { color: var(--won3); opacity: 0.35; }
+
+.metro-rows { display: flex; flex-direction: column; gap: 0.55rem; }
+.metro-row { display: flex; align-items: center; gap: 0.7rem; font-size: 0.84rem; color: var(--won2); }
+.m-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+.loc-map {
+  position: relative;
+  min-height: 460px;
+}
+.loc-map iframe {
+  width: 100%; height: 100%; min-height: 460px;
+  display: block; border: none;
+  filter: grayscale(100%) brightness(0.45) contrast(1.3) sepia(0.2);
+  transition: filter 0.4s;
+}
+.loc-map:hover iframe {
+  filter: grayscale(100%) brightness(0.55) contrast(1.2) sepia(0.15);
+}
+
+/* ═══════════════════════════════════
+   FOOTER
+═══════════════════════════════════ */
+footer {
+  background: var(--night);
+  border-top: 1px solid var(--border-d);
+  padding: 4rem 3.5rem 2.5rem;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr 1fr 1fr;
+  gap: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--border-d);
+  margin-bottom: 2rem;
+}
+
+.footer-brand {
+  font-family: var(--f-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--won);
+  margin-bottom: 0.5rem;
+}
+.footer-brand em { font-style: italic; color: var(--amber); font-weight: 400; }
+.footer-tagline { font-size: 0.8rem; color: var(--won3); line-height: 1.7; max-width: 28ch; }
+
+.fcol-title {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--won3);
+  margin-bottom: 1.2rem;
+}
+.fcol-link {
+  display: block;
+  font-size: 0.84rem;
+  color: var(--won2);
+  margin-bottom: 0.6rem;
+  transition: color 0.2s;
+}
+.fcol-link:hover { color: var(--amber-l); }
+.fcol-link.off { color: var(--won3); opacity: 0.4; }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+  color: var(--won3);
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+.footer-bottom a { transition: color 0.2s; }
+.footer-bottom a:hover { color: var(--amber); }
+
+/* ═══════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════ */
+@media (max-width: 960px) {
+  nav { padding: 0 1.5rem; }
+  .nav-links { display: none; }
+
+  .inner { padding: 0 1.5rem; }
+  .hero { padding: 7rem 1.5rem 5rem; }
+  .hero-chips { gap: 1.5rem; flex-wrap: wrap; }
+
+  .concept, .carte, .citation, .reservation, .localisation { padding-top: 5rem; padding-bottom: 5rem; }
+
+  .concept-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .menu-cols { grid-template-columns: 1fr; }
+  .menu-col { padding: 2rem 1.5rem; }
+
+  .resa-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .frow { grid-template-columns: 1fr; }
+
+  .loc-head { padding: 3rem 1.5rem 2rem; }
+  .loc-split { grid-template-columns: 1fr; }
+  .loc-info { border-right: none; border-bottom: 1px solid var(--border-d); padding: 2.5rem 1.5rem; }
+
+  footer { padding: 3rem 1.5rem 2rem; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+}
+
+@media (max-width: 600px) {
+  .footer-top { grid-template-columns: 1fr; }
+  .tabs-dark { flex-wrap: wrap; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAVIGATION ══ -->
+<nav id="nav">
+  <div class="nav-logo">La Cave <span>Saint-Honoré</span></div>
+  <div class="nav-links">
+    <a href="#concept" class="nav-link">La maison</a>
+    <a href="#carte" class="nav-link">La carte</a>
+    <a href="#localisation" class="nav-link">Accès</a>
+    <a href="#reservation" class="nav-cta">Réserver</a>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-rule">Restaurant · Cave · Bordeaux Chartrons</div>
+  <h1 class="hero-title">
+    La Cave<br>
+    <em>Saint-Honoré</em>
+  </h1>
+  <div class="hero-amber-line"></div>
+  <p class="hero-desc">
+    Une cuisine de marché ancrée dans le terroir bordelais,
+    servie dans une cave du XVIIIe siècle. L'honnêteté du produit,
+    la précision du geste, la générosité du verre.
+  </p>
+  <div class="hero-actions">
+    <a href="#reservation" class="btn btn-amber">Réserver une table</a>
+    <a href="#carte" class="btn btn-outline-d">Parcourir la carte</a>
+  </div>
+  <div class="hero-chips">
+    <div>
+      <div class="chip-val">1897</div>
+      <div class="chip-label">Bâtiment classé</div>
+    </div>
+    <div>
+      <div class="chip-val">44</div>
+      <div class="chip-label">Couverts</div>
+    </div>
+    <div>
+      <div class="chip-val">180+</div>
+      <div class="chip-label">Références en cave</div>
+    </div>
+    <div>
+      <div class="chip-val">Mar–Sam</div>
+      <div class="chip-label">Midi & soir</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONCEPT — PARCHMENT ══ -->
+<section class="concept" id="concept">
+  <div class="inner">
+    <div class="concept-grid">
+      <div>
+        <span class="light-tag">La maison</span>
+        <h2 class="h2-light">Trente ans de cave,<br><em>et toujours autant à dire.</em></h2>
+        <p class="sub-light" style="margin-bottom:1.5rem;">
+          Installée depuis 1993 dans une ancienne cave à vin du quartier des Chartrons,
+          La Cave Saint-Honoré a gardé ses voûtes en pierre, ses tables en chêne
+          et son goût pour les petits vignerons. La cuisine a évolué, pas l'esprit.
+        </p>
+        <p class="sub-light">
+          Hugo Martel, chef depuis 2011, cuisine les produits du Bassin d'Arcachon,
+          du Périgord et des maraîchers de l'Entre-Deux-Mers. Court circuit,
+          saisons respectées, carte qui change chaque semaine.
+        </p>
+        <div style="margin-top:2rem;">
+          <a href="#reservation" class="btn btn-outline-l">Réserver</a>
+        </div>
+      </div>
+      <div class="concept-right">
+        <div class="pillar">
+          <div class="pillar-num">I</div>
+          <div class="pillar-body">
+            <h4>Produits de proximité</h4>
+            <p>Huîtres du Cap Ferret, canard du Périgord, légumes du maraîcher de Cadillac — tout vient de moins de 150 km.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">II</div>
+          <div class="pillar-body">
+            <h4>Cave indépendante</h4>
+            <p>Plus de 180 références sélectionnées chez des vignerons en agriculture biologique ou biodynamique, essentiellement bordelais et sudouest.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">III</div>
+          <div class="pillar-body">
+            <h4>Cuisine vivante</h4>
+            <p>La carte change chaque semaine selon le marché. Pas de carte figée — on vous dit ce qu'on a trouvé de bien ce matin.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">IV</div>
+          <div class="pillar-body">
+            <h4>Le cadre</h4>
+            <p>Voûtes en pierre du XVIIIe, éclairage bougies, nappes en lin. Une salle de 44 couverts où l'on parle encore à voix basse.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CARTE — DARK ══ -->
+<section class="carte" id="carte">
+  <div class="inner">
+    <div class="carte-header">
+      <div>
+        <span class="amber-tag">À table</span>
+        <h2 class="h2-dark">La carte <em>de saison</em></h2>
+      </div>
+      <div class="tabs-dark">
+        <button class="tab-d active" onclick="tab(this,'c-entrees')">Entrées</button>
+        <button class="tab-d" onclick="tab(this,'c-plats')">Plats</button>
+        <button class="tab-d" onclick="tab(this,'c-desserts')">Desserts</button>
+        <button class="tab-d" onclick="tab(this,'c-vins')">Les vins</button>
+      </div>
+    </div>
+
+    <!-- Entrées -->
+    <div class="menu-panel active" id="c-entrees">
+      <div class="menu-cols">
+        <div class="menu-col">
+          <div class="menu-section">
+            <div class="menu-section-head">
+              <span class="menu-section-title">Entrées froides</span>
+              <span class="menu-section-tag">/ mer & terre</span>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Huîtres du Cap Ferret <span class="dish-v">saison</span></div>
+                <div class="dish-desc">Demi-douzaine, mignonette au vinaigre rouge, pain de seigle</div>
+              </div>
+              <div class="dish-price">16 €</div>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Terrine de canard du Périgord</div>
+                <div class="dish-desc">Confiture d'oignons rouges, cornichons maison, toast brioché</div>
+              </div>
+              <div class="dish-price">12 €</div>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Salade de betteraves rôties <span class="dish-v">V</span></div>
+                <div class="dish-desc">Chèvre frais, noix caramélisées, vinaigrette au miel de Gascogne</div>
+              </div>
+              <div class="dish-price">11 €</div>
+            </div>
+          </div>
+
+          <div class="menu-section">
+            <div class="menu-section-head">
+              <span class="menu-section-title">Entrées chaudes</span>
+              <span class="menu-section-tag">/ du feu</span>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Œuf parfait, crème de morilles</div>
+                <div class="dish-desc">Pain grillé au beurre de ferme, mouillettes, fleur de sel</div>
+              </div>
+              <div class="dish-price">13 €</div>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Croquettes de jambon de Bayonne</div>
+                <div class="dish-desc">Béchamel légère, salade de jeunes pousses</div>
+              </div>
+              <div class="dish-price">12 €</div>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Soupe à l'oignon gratinée</div>
+                <div class="dish-desc">Comté 18 mois, crouton frotté à l'ail, bouillon de veau</div>
+              </div>
+              <div class="dish-price">11 €</div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-col" style="background:var(--panel);">
+          <div class="menu-section">
+            <div class="menu-section-head">
+              <span class="menu-section-title">Planches & partage</span>
+              <span class="menu-section-tag">/ pour commencer</span>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Planche charcuteries du Sud-Ouest</div>
+                <div class="dish-desc">Jambon de Bayonne, rosette de Lyon, coppa Corse, rillettes de canard (2 pers.)</div>
+              </div>
+              <div class="dish-price">22 €</div>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Planche fromages affineurs Mons</div>
+                <div class="dish-desc">Sélection 4 fromages, pain aux noix, chutney de figues (2 pers.)</div>
+              </div>
+              <div class="dish-price">24 €</div>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Assiette mixte terre & mer</div>
+                <div class="dish-desc">Huîtres, terrine maison, chorizo ibérique, pain grillé (2 pers.)</div>
+              </div>
+              <div class="dish-price">28 €</div>
+            </div>
+          </div>
+
+          <div class="carte-formule">
+            <div class="formule-text">
+              <div class="formule-name">Formule déjeuner</div>
+              <div class="formule-desc">Entrée + Plat ou Plat + Dessert · Du mardi au vendredi</div>
+            </div>
+            <div class="formule-price">26 €</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Plats -->
+    <div class="menu-panel" id="c-plats">
+      <div class="menu-cols">
+        <div class="menu-col">
+          <div class="menu-section">
+            <div class="menu-section-head">
+              <span class="menu-section-title">Viandes</span>
+              <span class="menu-section-tag">/ du terroir</span>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Entrecôte de Bazas</div>
+                <div class="dish-desc">Sauce bordelaise, pommes sarladaises à la graisse de canard, haricots verts</div>
+              </div>
+              <div class="dish-price">32 €</div>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Confit de canard des Landes</div>
+                <div class="dish-desc">Pommes de terre persillées, salade verte, jus de cuisson</div>
+              </div>
+              <div class="dish-price">24 €</div>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Ris de veau poêlé</div>
+                <div class="dish-desc">Jus de veau réduit, girolles, purée de céleri-rave</div>
+              </div>
+              <div class="dish-price">28 €</div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-col" style="background:var(--panel);">
+          <div class="menu-section">
+            <div class="menu-section-head">
+              <span class="menu-section-title">Poissons</span>
+              <span class="menu-section-tag">/ de l'Atlantique</span>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Sole meunière</div>
+                <div class="dish-desc">Beurre citronné, câpres, légumes vapeur, pomme de terre grenaille</div>
+              </div>
+              <div class="dish-price">30 €</div>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Lamproie à la bordelaise</div>
+                <div class="dish-desc">Recette traditionnelle, poireaux fondants, vin de Graves</div>
+              </div>
+              <div class="dish-price">29 €</div>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Bar de ligne rôti <span class="dish-v">saison</span></div>
+                <div class="dish-desc">Fenouil braisé, vierge tomate-basilic, huile d'olive vierge</div>
+              </div>
+              <div class="dish-price">28 €</div>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Risotto d'orge perlé <span class="dish-v">V</span></div>
+                <div class="dish-desc">Parmesan 24 mois, champignons des bois, huile de truffe</div>
+              </div>
+              <div class="dish-price">22 €</div>
+            </div>
+          </div>
+          <div class="carte-formule">
+            <div class="formule-text">
+              <div class="formule-name">Menu complet</div>
+              <div class="formule-desc">Entrée + Plat + Dessert + Accord vins (3 verres)</div>
+            </div>
+            <div class="formule-price">68 €</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Desserts -->
+    <div class="menu-panel" id="c-desserts">
+      <div class="menu-cols">
+        <div class="menu-col">
+          <div class="menu-section">
+            <div class="menu-section-head">
+              <span class="menu-section-title">Desserts</span>
+              <span class="menu-section-tag">/ de saison</span>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Cannelés bordelais maison</div>
+                <div class="dish-desc">Crème vanille, rhum vieux, coque croustillante (×3)</div>
+              </div>
+              <div class="dish-price">8 €</div>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Moelleux au chocolat Grand Cru</div>
+                <div class="dish-desc">Cœur coulant, glace à la fleur de sel, tuile craquante</div>
+              </div>
+              <div class="dish-price">9 €</div>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Tarte fine aux pommes</div>
+                <div class="dish-desc">Pâte feuilletée maison, caramel beurre salé, glace vanille Bourbon</div>
+              </div>
+              <div class="dish-price">9 €</div>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Crème brûlée au Sauternes</div>
+                <div class="dish-desc">Cassonade caramélisée, pointe de vanille, pralin maison</div>
+              </div>
+              <div class="dish-price">8 €</div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-col" style="background:var(--panel);">
+          <div class="menu-section">
+            <div class="menu-section-head">
+              <span class="menu-section-title">Fromages</span>
+              <span class="menu-section-tag">/ affineurs Mons</span>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Assiette 3 fromages</div>
+                <div class="dish-desc">Sélection du moment, pain aux noix, chutney de saison</div>
+              </div>
+              <div class="dish-price">14 €</div>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Fromage & accord Sauternes</div>
+                <div class="dish-desc">3 fromages + verre de Château Suduiraut</div>
+              </div>
+              <div class="dish-price">22 €</div>
+            </div>
+          </div>
+          <div class="carte-formule">
+            <div class="formule-text">
+              <div class="formule-name">Plateau desserts & vins</div>
+              <div class="formule-desc">Assortiment 3 mignardises + accord vins doux (2 pers.)</div>
+            </div>
+            <div class="formule-price">28 €</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vins -->
+    <div class="menu-panel" id="c-vins">
+      <div class="menu-cols">
+        <div class="menu-col">
+          <div class="menu-section">
+            <div class="menu-section-head">
+              <span class="menu-section-title">Blancs & Bordeaux</span>
+              <span class="menu-section-tag">/ notre terroir</span>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Pessac-Léognan Blanc</div>
+                <div class="dish-desc">Domaine de Chevalier · 2021 — Sauvignon, Sémillon</div>
+              </div>
+              <div class="dish-price">12 € / 48 €</div>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Entre-Deux-Mers</div>
+                <div class="dish-desc">Château Tour de Mirambeau · 2022 — Frais, vif, floral</div>
+              </div>
+              <div class="dish-price">7 € / 26 €</div>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Graves Blanc</div>
+                <div class="dish-desc">Château Smith Haut Lafitte · 2020 — Grande élégance</div>
+              </div>
+              <div class="dish-price">16 € / 64 €</div>
+            </div>
+          </div>
+          <div class="menu-section">
+            <div class="menu-section-head">
+              <span class="menu-section-title">Rouges de Bordeaux</span>
+              <span class="menu-section-tag">/ merlot & cabernet</span>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Saint-Émilion Grand Cru</div>
+                <div class="dish-desc">Château Beau-Séjour Bécot · 2019 — Puissant, velouté</div>
+              </div>
+              <div class="dish-price">18 € / 74 €</div>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Pomerol</div>
+                <div class="dish-desc">Château Lafleur-Gazin · 2020 — Merlot, charnu</div>
+              </div>
+              <div class="dish-price">15 € / 58 €</div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-col" style="background:var(--panel);">
+          <div class="menu-section">
+            <div class="menu-section-head">
+              <span class="menu-section-title">Vins du Sud-Ouest</span>
+              <span class="menu-section-tag">/ hors Bordeaux</span>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Cahors — Malbec</div>
+                <div class="dish-desc">Château du Cèdre · 2020 — Tannins soyeux, notes de prune</div>
+              </div>
+              <div class="dish-price">9 € / 34 €</div>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Jurançon Sec</div>
+                <div class="dish-desc">Domaine Cauhapé · 2022 — Petit et gros Manseng, minéral</div>
+              </div>
+              <div class="dish-price">8 € / 30 €</div>
+            </div>
+          </div>
+          <div class="menu-section">
+            <div class="menu-section-head">
+              <span class="menu-section-title">Vins doux & champagne</span>
+              <span class="menu-section-tag">/ l'accord fromage</span>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Sauternes — Château Suduiraut</div>
+                <div class="dish-desc">2018 · Premier Grand Cru Classé — Miel, abricot confit</div>
+              </div>
+              <div class="dish-price">14 € / 55 €</div>
+            </div>
+            <div class="dish-row">
+              <div>
+                <div class="dish-name">Champagne Billecart-Salmon</div>
+                <div class="dish-desc">Blanc de Blancs Brut NV — Bulles fines, agrumes</div>
+              </div>
+              <div class="dish-price">16 € / 70 €</div>
+            </div>
+          </div>
+          <div class="carte-formule">
+            <div class="formule-text">
+              <div class="formule-name">Accord mets & vins</div>
+              <div class="formule-desc">3 verres choisis par notre sommelier pour votre menu</div>
+            </div>
+            <div class="formule-price">24 €</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ CITATION ══ -->
+<section class="citation">
+  <p class="citation-text">
+    « Une bonne table, c'est <strong>un bon produit</strong>,<br>
+    une main qui le respecte,<br>
+    et un verre qui lui répond. »
+  </p>
+  <div class="citation-attr">Hugo Martel · Chef depuis 2011</div>
+</section>
+
+<!-- ══ RÉSERVATION — PARCHMENT ══ -->
+<section class="reservation" id="reservation">
+  <div class="inner">
+    <div class="resa-grid">
+      <div class="resa-aside">
+        <span class="light-tag">Réservation</span>
+        <h2 class="h2-light">Retenez<br><em>votre table.</em></h2>
+        <p>Nous confirmons chaque réservation par téléphone ou email sous 4 heures. Pour les groupes et événements privés, contactez-nous directement.</p>
+        <div class="contact-items">
+          <a href="tel:+33556001234" class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div><strong>05 56 00 12 34</strong>Mar–Sam · 10h–22h</div>
+          </a>
+          <a href="mailto:table@cavesainthonore.fr" class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div><strong>table@cavesainthonore.fr</strong>Réponse sous 4h</div>
+          </a>
+          <a href="#localisation" class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div><strong>18, rue Borie · Bordeaux Chartrons</strong>M° Chartrons (2 min)</div>
+          </a>
+        </div>
+      </div>
+
+      <form class="resa-form-wrap" id="resa-form">
+        <div class="frow">
+          <div class="fld"><label for="rp">Prénom</label><input type="text" id="rp" placeholder="Sophie" required></div>
+          <div class="fld"><label for="rn">Nom</label><input type="text" id="rn" placeholder="Dubois" required></div>
+        </div>
+        <div class="frow">
+          <div class="fld"><label for="rt">Téléphone</label><input type="tel" id="rt" placeholder="06 00 00 00 00" required></div>
+          <div class="fld"><label for="re">Email</label><input type="email" id="re" placeholder="sophie@mail.com"></div>
+        </div>
+        <div class="frow">
+          <div class="fld"><label for="rd">Date</label><input type="date" id="rd" required></div>
+          <div class="fld"><label for="rs">Service</label>
+            <select id="rs">
+              <option disabled selected>Choisir</option>
+              <option>Déjeuner · 12h00–14h30</option>
+              <option>Dîner · 19h30–22h30</option>
+            </select>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fld"><label for="rc">Couverts</label>
+            <select id="rc" required>
+              <option disabled selected>Combien ?</option>
+              <option>1</option><option>2</option><option>3</option>
+              <option>4</option><option>5</option><option>6</option>
+              <option>7 et plus (nous appeler)</option>
+            </select>
+          </div>
+          <div class="fld"><label for="ro">Occasion</label>
+            <select id="ro">
+              <option disabled selected>Optionnel</option>
+              <option>Repas d'affaires</option>
+              <option>Anniversaire</option>
+              <option>Repas en famille</option>
+              <option>Romantique</option>
+              <option>Événement privé</option>
+            </select>
+          </div>
+        </div>
+        <div class="frow full-w">
+          <div class="fld"><label for="rm">Message (allergies, accords vins…)</label>
+            <textarea id="rm" placeholder="Intolérance au gluten, accord vins sur mesure souhaité…"></textarea>
+          </div>
+        </div>
+        <button type="submit" class="resa-btn">Envoyer ma demande de réservation</button>
+        <div id="resa-confirm">Merci — nous vous recontactons sous 4 heures pour confirmer.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ══ LOCALISATION — DARK ══ -->
+<section class="localisation" id="localisation">
+  <div class="loc-head inner">
+    <span class="amber-tag">Accès</span>
+    <h2 class="h2-dark">Nous <em>trouver</em></h2>
+  </div>
+  <div class="loc-split">
+    <div class="loc-info">
+      <div class="loc-block">
+        <span class="loc-lbl">Adresse</span>
+        <div class="loc-val">
+          18, rue Borie<br>
+          33300 Bordeaux — Chartrons<br><br>
+          <a href="https://maps.google.com/?q=18+rue+Borie+Bordeaux" target="_blank">Ouvrir dans Google Maps ↗</a>
+        </div>
+      </div>
+      <div class="loc-block">
+        <span class="loc-lbl">Horaires</span>
+        <div class="hours-list">
+          <div class="hl closed"><span class="dj">Lundi</span><span class="hh">Fermé</span></div>
+          <div class="hl"><span class="dj">Mardi</span><span class="hh">12h–14h30 · 19h30–22h30</span></div>
+          <div class="hl"><span class="dj">Mercredi</span><span class="hh">12h–14h30 · 19h30–22h30</span></div>
+          <div class="hl"><span class="dj">Jeudi</span><span class="hh">12h–14h30 · 19h30–22h30</span></div>
+          <div class="hl"><span class="dj">Vendredi</span><span class="hh">12h–14h30 · 19h30–23h00</span></div>
+          <div class="hl"><span class="dj">Samedi</span><span class="hh">19h30–23h00</span></div>
+          <div class="hl closed"><span class="dj">Dimanche</span><span class="hh">Fermé</span></div>
+        </div>
+      </div>
+      <div class="loc-block">
+        <span class="loc-lbl">Transports</span>
+        <div class="metro-rows">
+          <div class="metro-row">
+            <div class="m-dot" style="background:#E8A020;"></div>
+            Tram C · Chartrons (2 min à pied)
+          </div>
+          <div class="metro-row">
+            <div class="m-dot" style="background:#D4373C;"></div>
+            Bus 4 · Arrêt Fondaudège
+          </div>
+          <div class="metro-row" style="font-size:0.8rem;color:var(--won3);">
+            🚲 V3 · Station Borie (devant l'entrée)
+          </div>
+        </div>
+      </div>
+      <div class="loc-block">
+        <span class="loc-lbl">Contact</span>
+        <div class="loc-val">
+          <a href="tel:+33556001234">05 56 00 12 34</a><br>
+          <a href="mailto:table@cavesainthonore.fr">table@cavesainthonore.fr</a>
+        </div>
+      </div>
+    </div>
+    <div class="loc-map">
+      <iframe
+        src="https://www.openstreetmap.org/export/embed.html?bbox=-0.5750%2C44.8500%2C-0.5550%2C44.8610&layer=mapnik&marker=44.8553%2C-0.5651"
+        allowfullscreen loading="lazy"
+        title="La Cave Saint-Honoré — Bordeaux Chartrons">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">La Cave <em>Saint-Honoré</em></div>
+      <div class="footer-tagline">Restaurant & Cave · Bordeaux Chartrons depuis 1993. Produits du terroir, vins de vignerons.</div>
+    </div>
+    <div>
+      <div class="fcol-title">Navigation</div>
+      <a href="#concept" class="fcol-link">La maison</a>
+      <a href="#carte" class="fcol-link">La carte</a>
+      <a href="#reservation" class="fcol-link">Réserver</a>
+      <a href="#localisation" class="fcol-link">Accès</a>
+    </div>
+    <div>
+      <div class="fcol-title">Horaires</div>
+      <span class="fcol-link off">Lundi · Fermé</span>
+      <span class="fcol-link">Mar–Ven · 12h–22h30</span>
+      <span class="fcol-link">Samedi · 19h30–23h</span>
+      <span class="fcol-link off">Dimanche · Fermé</span>
+    </div>
+    <div>
+      <div class="fcol-title">Contact</div>
+      <a href="tel:+33556001234" class="fcol-link">05 56 00 12 34</a>
+      <a href="mailto:table@cavesainthonore.fr" class="fcol-link">table@cavesainthonore.fr</a>
+      <span class="fcol-link off">18 rue Borie · Bordeaux</span>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 La Cave Saint-Honoré · Bordeaux</span>
+    <a href="#">Mentions légales</a>
+  </div>
+</footer>
+
+<script>
+// Nav
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('solid', window.scrollY > 60);
+}, { passive: true });
+
+// Tabs
+function tab(btn, id) {
+  document.querySelectorAll('.tab-d').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+// Form
+document.getElementById('resa-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  this.querySelectorAll('input,select,textarea,button').forEach(el => el.disabled = true);
+  document.getElementById('resa-confirm').style.display = 'block';
+});
+
+// Date min
+const d = document.getElementById('rd');
+if (d) d.min = new Date().toISOString().split('T')[0];
+</script>
+</body>
+</html>
