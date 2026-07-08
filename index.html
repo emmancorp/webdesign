@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Emmanuel — Création de sites web</title>
-<link rel="icon" href="Images/logo_webdesign.png" type="image/x-icon">
+<link rel="icon" type="image/x-icon" href="Images/logo_webdesign.png">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 
@@ -1118,221 +1118,143 @@ footer {
 
             <div class="work-grid">
 
-                <!-- ─ SITE 1 ─ -->
-                <div class="work-card" style="--preview-c: #0C0C0C;" data-bg="url('Images/coiffeur_classique.png')">
-                    <div class="work-preview">
-                        <div class="work-preview-inner">
-                            <div class="mini-browser">
-                                <div class="mini-bar">
-                                    <div class="mini-dot" style="background:#FF3366;"></div>
-                                    <div class="mini-dot" style="background:#9B5CF6;"></div>
-                                    <div class="mini-dot" style="background:#333;"></div>
-                                </div>
-                                <div class="mini-content">
-                                    <div class="mini-line accent" style="background:linear-gradient(90deg,#FF3366,#9B5CF6);opacity:0.7;"></div>
-                                    <div class="mini-line"></div>
-                                    <div class="mini-line short"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="work-overlay">
-                            <a href="Pages/coiffeur_classique.html" target="_blank" class="overlay-btn">
-                                Voir le site
-                                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" /></svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="work-info">
-                        <div class="work-type">Coiffeur · Classique</div>
-                        <div class="work-name">Maison Rive</div>
-                        <div class="work-desc">Site classique beige et noir. Avis, localisation, services.</div>
-                        <div class="work-tags">
-                            <span class="work-tag">Light</span>
-                            <span class="work-tag">Elégant</span>
-                            <span class="work-tag">Carte OSM</span>
-                        </div>
-                    </div>
-                </div>
+    <!-- ─ SITE 1 ─ -->
+    <div class="work-card" style="--preview-c: #0C0C0C;" data-bg="url('Images/coiffeur_classique.png')">
+        <div class="work-preview" style="padding:0; overflow:hidden;">
+           <img src="Images/coiffeur_classique.png" alt="Maison Rive" style="width: 100%; height: 100%; object-fit: 100%; object-position: top; display: block; min-height: 180px;">
+           <div class="work-overlay">
+            <a href="Pages/coiffeur_classique.html" target="_blank" class="overlay-btn">
+               Voir le site
+               <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+            </a>
+           </div>
+         </div>
+        <div class="work-info">
+            <div class="work-type">Coiffeur · Classique</div>
+            <div class="work-name">Maison Rive</div>
+            <div class="work-desc">Site classique beige et noir. Avis, localisation, services.</div>
+            <div class="work-tags">
+                <span class="work-tag">Light</span>
+                <span class="work-tag">Elégant</span>
+                <span class="work-tag">Carte OSM</span>
+            </div>
+        </div>
+    </div>
 
-                <!-- ─ SITE 2 ─ -->
-                <div class="work-card" style="--preview-c: #0C0C0C;" data-bg="url('Images/coiffeur_artistique.png')">
-                    <div class="work-preview">
-                        <div class="work-preview-inner">
-                            <div class="mini-browser">
-                                <div class="mini-bar">
-                                    <div class="mini-dot" style="background:#FF3366;"></div>
-                                    <div class="mini-dot" style="background:#9B5CF6;"></div>
-                                    <div class="mini-dot" style="background:#333;"></div>
-                                </div>
-                                <div class="mini-content">
-                                    <div class="mini-line accent" style="background:linear-gradient(90deg,#FF3366,#9B5CF6);opacity:0.7;"></div>
-                                    <div class="mini-line"></div>
-                                    <div class="mini-line short"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="work-overlay">
-                            <a href="Pages/coiffeur_artistique.html" target="_blank" class="overlay-btn">
-                                Voir le site
-                                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" /></svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="work-info">
-                        <div class="work-type">Coiffeur · Artistique</div>
-                        <div class="work-name">Maison Karev</div>
-                        <div class="work-desc">Site chic noir et jaune. Formulaire RDV, localisation, services.</div>
-                        <div class="work-tags">
-                            <span class="work-tag">Dark</span>
-                            <span class="work-tag">Chic</span>
-                            <span class="work-tag">Carte OSM</span>
-                        </div>
-                    </div>
-                </div>
+    <!-- ─ SITE 2 ─ -->
+    <div class="work-card" style="--preview-c: #0C0C0C;" data-bg="url('Images/coiffeur_artistique.png')">
+        <div class="work-preview" style="padding:0; overflow:hidden;">
+            <img src="Images/coiffeur_artistique.png" alt="Maison Karev" style="width: 100%; height: 100%; object-fit: 100%; object-position: top; display: block; min-height: 180px;">
+            <div class="work-overlay">
+                <a href="Pages/coiffeur_artistique.html" target="_blank" class="overlay-btn">
+                    Voir le site
+                    <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" /></svg>
+                </a>
+            </div>
+        </div>
+        <div class="work-info">
+            <div class="work-type">Coiffeur · Artistique</div>
+            <div class="work-name">Maison Karev</div>
+            <div class="work-desc">Site chic noir et jaune. Formulaire RDV, localisation, services.</div>
+            <div class="work-tags">
+                <span class="work-tag">Dark</span>
+                <span class="work-tag">Chic</span>
+                <span class="work-tag">Carte OSM</span>
+            </div>
+        </div>
+    </div>
 
-                <!-- ─ SITE 3 ─ -->
-                <div class="work-card" style="--preview-c: #F3EDE1;" data-bg="url('Images/coiffeur_moderne.png')">
-                    <div class="work-preview">
-                        <div class="work-preview-inner">
-                            <div class="mini-browser" style="border-color:rgba(0,0,0,0.1);">
-                                <div class="mini-bar" style="background:rgba(0,0,0,0.08);">
-                                    <div class="mini-dot" style="background:#6B2737;"></div>
-                                    <div class="mini-dot" style="background:#B8943F;"></div>
-                                    <div class="mini-dot" style="background:#ccc;"></div>
-                                </div>
-                                <div class="mini-content">
-                                    <div class="mini-line accent" style="background:rgba(107,39,55,0.5);"></div>
-                                    <div class="mini-line" style="background:rgba(0,0,0,0.1);"></div>
-                                    <div class="mini-line short" style="background:rgba(0,0,0,0.07);"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="work-overlay">
-                            <a href="Pages/coiffeur_moderne.html" target="_blank" class="overlay-btn">
-                                Voir le site
-                                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" /></svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="work-info">
-                        <div class="work-type">Coiffeur · Moderne</div>
-                        <div class="work-name">Volt Studio</div>
-                        <div class="work-desc">Site moderne sombre et coloré. Formulaire RDV, localisation, services.</div>
-                        <div class="work-tags">
-                            <span class="work-tag">Dark</span>
-                            <span class="work-tag">Coloré</span>
-                            <span class="work-tag">Carte OSM</span>
-                        </div>
-                    </div>
-                </div>
+    <!-- ─ SITE 3 ─ -->
+    <div class="work-card" style="--preview-c: #F3EDE1;" data-bg="url('Images/coiffeur_moderne.png')">
+        <div class="work-preview" style="padding:0; overflow:hidden;">
+            <img src="Images/coiffeur_moderne.png" alt="Volt Studio" style="width: 100%; height: 100%; object-fit: 100%; object-position: top; display: block; min-height: 180px;">
+            <div class="work-overlay">
+                <a href="Pages/coiffeur_moderne.html" target="_blank" class="overlay-btn">
+                    Voir le site
+                    <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" /></svg>
+                </a>
+            </div>
+        </div>
+        <div class="work-info">
+            <div class="work-type">Coiffeur · Moderne</div>
+            <div class="work-name">Volt Studio</div>
+            <div class="work-desc">Site moderne sombre et coloré. Formulaire RDV, localisation, services.</div>
+            <div class="work-tags">
+                <span class="work-tag">Dark</span>
+                <span class="work-tag">Coloré</span>
+                <span class="work-tag">Carte OSM</span>
+            </div>
+        </div>
+    </div>
 
-                <!-- ─ SITE 4 ─ -->
-                <div class="work-card" style="--preview-c: #F8F4EF;" data-bg="url('Images/restaurant.png')">
-                    <div class="work-preview">
-                        <div class="work-preview-inner">
-                            <div class="mini-browser" style="border-color:rgba(0,0,0,0.08);">
-                                <div class="mini-bar" style="background:rgba(0,0,0,0.06);">
-                                    <div class="mini-dot" style="background:#C05A35;"></div>
-                                    <div class="mini-dot" style="background:#6B8F71;"></div>
-                                    <div class="mini-dot" style="background:#ccc;"></div>
-                                </div>
-                                <div class="mini-content">
-                                    <div class="mini-line accent" style="background:rgba(192,90,53,0.5);"></div>
-                                    <div class="mini-line" style="background:rgba(0,0,0,0.08);"></div>
-                                    <div class="mini-line short" style="background:rgba(0,0,0,0.06);"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="work-overlay">
-                            <a href="Pages/restaurant.html" target="_blank" class="overlay-btn">
-                                Voir le site
-                                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" /></svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="work-info">
-                        <div class="work-type">Restaurant · Classique</div>
-                        <div class="work-name">Le Mercier</div>
-                        <div class="work-desc">Gastronomie française. Fond ivoire, menu imprimé avec lignes de points, 3 onglets, carte des vins.</div>
-                        <div class="work-tags">
-                            <span class="work-tag">Light</span>
-                            <span class="work-tag">Élégant</span>
-                            <span class="work-tag">Menu Complet</span>
-                        </div>
-                    </div>
-                </div>
+    <!-- ─ SITE 4 ─ -->
+    <div class="work-card" style="--preview-c: #F8F4EF;" data-bg="url('Images/restaurant.png')">
+        <div class="work-preview" style="padding:0; overflow:hidden;">
+            <img src="Images/restaurant.png" alt="Le Mercier" style="width: 100%; height: 100%; object-fit: 100%; object-position: top; display: block; min-height: 180px;">
+            <div class="work-overlay">
+                <a href="Pages/restaurant.html" target="_blank" class="overlay-btn">
+                    Voir le site
+                    <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" /></svg>
+                </a>
+            </div>
+        </div>
+        <div class="work-info">
+            <div class="work-type">Restaurant · Classique</div>
+            <div class="work-name">Le Mercier</div>
+            <div class="work-desc">Gastronomie française. Fond ivoire, menu imprimé avec lignes de points, 3 onglets, carte des vins.</div>
+            <div class="work-tags">
+                <span class="work-tag">Light</span>
+                <span class="work-tag">Élégant</span>
+                <span class="work-tag">Menu Complet</span>
+            </div>
+        </div>
+    </div>
 
-                <!-- ─ SITE 5 ─ -->
-                <div class="work-card" style="--preview-c: #131A15;" data-bg="url('Images/bistrot.png')">
-                    <div class="work-preview">
-                        <div class="work-preview-inner">
-                            <div class="mini-browser">
-                                <div class="mini-bar">
-                                    <div class="mini-dot" style="background:#C8923A;"></div>
-                                    <div class="mini-dot" style="background:#6B8F71;"></div>
-                                    <div class="mini-dot" style="background:#333;"></div>
-                                </div>
-                                <div class="mini-content">
-                                    <div class="mini-line accent" style="background:rgba(200,146,58,0.6);"></div>
-                                    <div class="mini-line"></div>
-                                    <div class="mini-line short"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="work-overlay">
-                            <a href="Pages/bistrot.html" target="_blank" class="overlay-btn">
-                                Voir le site
-                                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" /></svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="work-info">
-                        <div class="work-type">Restaurant · Bistrot</div>
-                        <div class="work-name">Chez Paulette</div>
-                        <div class="work-desc">Bistrot traditionnel lyonnais. Hero asymétrique, terracotta + vert sauge, cartes de plats modernes.</div>
-                        <div class="work-tags">
-                            <span class="work-tag">Light</span>
-                            <span class="work-tag">Chaleureux</span>
-                            <span class="work-tag">Coloré</span>
-                        </div>
-                    </div>
-                </div>
+    <!-- ─ SITE 5 ─ -->
+    <div class="work-card" style="--preview-c: #131A15;" data-bg="url('Images/bistrot.png')">
+        <div class="work-preview" style="padding:0; overflow:hidden;">
+            <img src="Images/bistrot.png" alt="Chez Paulette" style="width: 100%; height: 100%; object-fit: 100%; object-position: top; display: block; min-height: 180px;">
+            <div class="work-overlay">
+                <a href="Pages/bistrot.html" target="_blank" class="overlay-btn">
+                    Voir le site
+                    <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" /></svg>
+                </a>
+            </div>
+        </div>
+        <div class="work-info">
+            <div class="work-type">Restaurant · Bistrot</div>
+            <div class="work-name">Chez Paulette</div>
+            <div class="work-desc">Bistrot traditionnel lyonnais. Hero asymétrique, terracotta + vert sauge, cartes de plats modernes.</div>
+            <div class="work-tags">
+                <span class="work-tag">Light</span>
+                <span class="work-tag">Chaleureux</span>
+                <span class="work-tag">Coloré</span>
+            </div>
+        </div>
+    </div>
 
-                <!-- ─ SITE 6 ─ -->
-                <div class="work-card" style="--preview-c: #0E161F;" data-bg="url('Images/cave.png')">
-                    <div class="work-preview">
-                        <div class="work-preview-inner">
-                            <div class="mini-browser">
-                                <div class="mini-bar">
-                                    <div class="mini-dot" style="background:#C8763A;"></div>
-                                    <div class="mini-dot" style="background:#5FAFD1;"></div>
-                                    <div class="mini-dot" style="background:#333;"></div>
-                                </div>
-                                <div class="mini-content">
-                                    <div class="mini-line accent" style="background:rgba(200,118,58,0.5);"></div>
-                                    <div class="mini-line"></div>
-                                    <div class="mini-line short"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="work-overlay">
-                            <a href="Pages/cave.html" target="_blank" class="overlay-btn">
-                                Voir le site
-                                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" /></svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="work-info">
-                        <div class="work-type">Restaurant · Cave</div>
-                        <div class="work-name">La Cave Saint-Honoré</div>
-                        <div class="work-desc">Vert forêt + ambre, mi-moderne mi-traditionnel. Bandes alternées sombre/clair, menu cave complète.</div>
-                        <div class="work-tags">
-                            <span class="work-tag">Dark</span>
-                            <span class="work-tag">Traditionnel</span>
-                            <span class="work-tag">Carte des vins</span>
-                        </div>
-                    </div>
-                </div>
+    <!-- ─ SITE 6 ─ -->
+    <div class="work-card" style="--preview-c: #0E161F;" data-bg="url('Images/cave.png')">
+        <div class="work-preview" style="padding:0; overflow:hidden;">
+            <img src="Images/cave.png" alt="La Cave Saint-Honoré" style="width:100%; height:100%; object-fit:100%; object-position:top; display:block; min-height:180px;">
+            <div class="work-overlay">
+                <a href="Pages/cave.html" target="_blank" class="overlay-btn">
+                    Voir le site
+                    <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" /></svg>
+                </a>
+            </div>
+        </div>
+        <div class="work-info">
+            <div class="work-type">Restaurant · Cave</div>
+            <div class="work-name">La Cave Saint-Honoré</div>
+            <div class="work-desc">Vert forêt + ambre, mi-moderne mi-traditionnel. Bandes alternées sombre/clair, menu cave complète.</div>
+            <div class="work-tags">
+                <span class="work-tag">Dark</span>
+                <span class="work-tag">Traditionnel</span>
+                <span class="work-tag">Carte des vins</span>
+            </div>
+        </div>
+    </div>
 
                 <!-- ─ AJOUTER UN SITE — décommentez et remplissez ce bloc
             <div class="work-card" style="- -preview-c: #COULEUR_HEX;">
