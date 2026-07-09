@@ -717,6 +717,32 @@ h2 .blue { color: var(--blue-l); }
   font-weight: 400;
 }
 
+   .promo-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: white;
+  background: #E03B3B;
+  padding: 0.28rem 0.7rem;
+  border-radius: 5px;
+  margin-bottom: 0.8rem;
+}
+
+.price-old {
+  font-family: var(--f-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #E03B3B;
+  text-decoration: line-through;
+  text-decoration-color: #E03B3B;
+  text-decoration-thickness: 2px;
+  margin-bottom: 0.2rem;
+  opacity: 0.85;
+}
+
 .offer-sub {
   font-size: 0.78rem;
   color: var(--gray2);
@@ -1312,86 +1338,91 @@ footer {
          et ajustez le nombre de colonnes dans .offers-grid.
          ───────────────────────────────────────────────── -->
     <section class="section offres" id="offres">
-        <div class="section-inner">
-            <div class="section-head">
-                <div class="mono-tag">Tarifs</div>
-                <h2>Des offres <span class="blue">claires</span></h2>
-                <p class="section-sub">Pas de surprise, pas d'abonnement caché. Vous payez une fois, le site est à vous.</p>
-            </div>
-
-            <div class="offers-grid">
-
-                <!-- OFFRE 1 — ESSENTIEL -->
-                <div class="offer-card">
-                    <div class="offer-name">Essentiel</div>
-                    <div class="offer-price"><sup>A partir de </sup> 150 €</div>
-                    <div class="offer-sub">Site vitrine 1 page — idéal pour démarrer ou tester votre présence en ligne.</div>
-                    <div class="offer-divider"></div>
-                    <ul class="offer-features">
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>1 page responsive</li>
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Présentation, services, contact</li>
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Formulaire de contact</li>
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Adapté mobile & tablette</li>
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>3 révisions incluses</li>
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Livraison en 5–7 jours*</li>
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Code source fourni</li>
-                        <li><span class="cross">✕</span>Localisation / carte</li>
-                        <li><span class="cross">✕</span>Menu / catalogue</li>
-                        <li><span class="cross">✕</span>Animations avancées</li>
-                    </ul>
-                    <a href="#contact" class="offer-btn offer-btn-ghost">Commencer</a>
-                </div>
-
-                <!-- OFFRE 2 — PRO (mise en avant) -->
-                <div class="offer-card featured">
-                    <div class="featured-badge">Le plus populaire</div>
-                    <div class="offer-name">Professionnel</div>
-                    <div class="offer-price"><sup>A partir de </sup> 290 €</div>
-                    <div class="offer-sub">Site complet multi-sections — pour les commerces, restaurants, coiffeurs et indépendants.</div>
-                    <div class="offer-divider"></div>
-                    <ul class="offer-features">
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>3 à 6 sections sur mesure</li>
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Présentation, services, galerie</li>
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Formulaire de contact / RDV</li>
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Localisation & carte intégrée</li>
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Horaires, tarifs, menu</li>
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Adapté mobile & tablette</li>
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>3 révisions incluses</li>
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Livraison en 7–10 jours*</li>
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Code source fourni</li>
-                    </ul>
-                    <a href="#contact" class="offer-btn offer-btn-blue">Commencer</a>
-                </div>
-
-                <!-- OFFRE 3 — SUR MESURE -->
-                <div class="offer-card">
-                    <div class="offer-name">Sur mesure</div>
-                    <div class="offer-price" style="font-size:2rem;padding-top:0.3rem;">Devis<br>gratuit</div>
-                    <div class="offer-sub">Projet complexe, multipage, fonctionnalités spécifiques — on en parle ensemble.</div>
-                    <div class="offer-divider"></div>
-                    <ul class="offer-features">
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Nombre de pages illimité</li>
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Design 100% original</li>
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Animations & interactions</li>
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Catalogue, galerie, filtres</li>
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Fonctionnalités sur demande</li>
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Accompagnement complet</li>
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Révisions dans la limite du délai</li>
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Délai selon projet</li>
-                        <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Maintenance en option</li>
-                    </ul>
-                    <a href="#contact" class="offer-btn offer-btn-ghost">Demander un devis</a>
-                </div>
-
-            </div>
+    <div class="section-inner">
+        <div class="section-head">
+            <div class="mono-tag">Tarifs</div>
+            <h2>Des offres <span class="blue">claires</span></h2>
+            <p class="section-sub">Pas de surprise, pas d'abonnement caché. Vous payez une fois, le site est à vous.</p>
             <p style="text-align:center;margin-top:2rem;font-size:0.78rem;color:var(--gray);font-family:var(--f-mono);">
-                * Sous réserve de réception des contenus et validation du client
-            </p>
-            <p style="text-align:center;margin-top:2rem;font-size:0.78rem;color:var(--gray);font-family:var(--f-mono);">
-                // Tous les sites sont livrés en code HTML/CSS/JS — aucun abonnement CMS, vous êtes propriétaire du code et de l'hébergement.
+                Offre de lancement à hauteur de -40%, valable jusqu'au 31 août 2026
             </p>
         </div>
-    </section>
+
+        <div class="offers-grid">
+
+            <!-- OFFRE 1 — ESSENTIEL -->
+            <div class="offer-card">
+                <div class="offer-name">Essentiel <br /><div class="promo-badge">Lancement • Été 2026</div></div>
+                <div class="price-old">250 €</div>
+                <div class="offer-price"><sup>A partir de </sup> 150 €</div>
+                <div class="offer-sub">Site vitrine 1 page — idéal pour démarrer ou tester votre présence en ligne.</div>
+                <div class="offer-divider"></div>
+                <ul class="offer-features">
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>1 page responsive</li>
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Présentation, services, contact</li>
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Formulaire de contact</li>
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Adapté mobile & tablette</li>
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>3 révisions incluses</li>
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Livraison en 5–7 jours*</li>
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Code source fourni</li>
+                    <li><span class="cross">✕</span>Localisation / carte</li>
+                    <li><span class="cross">✕</span>Menu / catalogue</li>
+                    <li><span class="cross">✕</span>Animations avancées</li>
+                </ul>
+                <a href="#contact" class="offer-btn offer-btn-ghost">Commencer</a>
+            </div>
+
+            <!-- OFFRE 2 — PRO (mise en avant) -->
+            <div class="offer-card featured">
+                <div class="featured-badge">Le plus populaire</div>
+                <div class="offer-name">Professionnel <div class="promo-badge">Lancement • Été 2026</div></div>
+                <div class="price-old">480 €</div>
+                <div class="offer-price"><sup>A partir de </sup> 290 €</div>
+                <div class="offer-sub">Site complet multi-sections — pour les commerces, restaurants, coiffeurs et indépendants.</div>
+                <div class="offer-divider"></div>
+                <ul class="offer-features">
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>3 à 6 sections sur mesure</li>
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Présentation, services, galerie</li>
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Formulaire de contact / RDV</li>
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Localisation & carte intégrée</li>
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Horaires, tarifs, menu</li>
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Adapté mobile & tablette</li>
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>3 révisions incluses</li>
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Livraison en 7–10 jours*</li>
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Code source fourni</li>
+                </ul>
+                <a href="#contact" class="offer-btn offer-btn-blue">Commencer</a>
+            </div>
+
+            <!-- OFFRE 3 — SUR MESURE -->
+            <div class="offer-card">
+                <div class="offer-name">Sur mesure</div>
+                <div class="offer-price" style="font-size:2rem;padding-top:0.3rem;">Devis<br>gratuit</div>
+                <div class="offer-sub">Projet complexe, multipage, fonctionnalités spécifiques — on en parle ensemble.</div>
+                <div class="offer-divider"></div>
+                <ul class="offer-features">
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Nombre de pages illimité</li>
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Design 100% original</li>
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Animations & interactions</li>
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Catalogue, galerie, filtres</li>
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Fonctionnalités sur demande</li>
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Accompagnement complet</li>
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Révisions dans la limite du délai</li>
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Délai selon projet</li>
+                    <li class="included"><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" /></svg></span>Maintenance en option</li>
+                </ul>
+                <a href="#contact" class="offer-btn offer-btn-ghost">Demander un devis</a>
+            </div>
+
+        </div>
+        <p style="text-align:center;margin-top:2rem;font-size:0.78rem;color:var(--gray);font-family:var(--f-mono);">
+            * Sous réserve de réception des contenus et validation du client
+        </p>
+        <p style="text-align:center;margin-top:2rem;font-size:0.78rem;color:var(--gray);font-family:var(--f-mono);">
+            // Tous les sites sont livrés en code HTML/CSS/JS — aucun abonnement CMS, vous êtes propriétaire du code et de l'hébergement.
+        </p>
+    </div>
+</section>
 
     <!-- ══ CONTACT ══ -->
     <section class="section contact" id="contact">
